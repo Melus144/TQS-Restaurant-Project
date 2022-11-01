@@ -1,0 +1,2526 @@
+openapi: 3.0.3
+info:
+  title: 'Smart Restaurant Manager'
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'http://localhost'
+paths:
+  /api/v1/ai/data:
+    get:
+      summary: 'Get retrain data'
+      description: "User retrieves all retrain data\n\nReturns 200 OK if database contains any data."
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                example:
+                  -
+                    date: '2022/04/13 21:30:00'
+                    food_types:
+                      - type1
+                      - type2
+                    festive: true
+                  -
+                    date: '2022/04/13 21:30:00'
+                    food_types:
+                      - type3
+                      - type4
+                    festive: true
+      tags:
+        - AI
+      security: []
+  /api/v1/ai/retrain-customers:
+    get:
+      summary: 'Get Retrain Customers'
+      description: "Activates retrain model for customers.\n\nReturns 200 OK."
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example: {  }
+                properties: {  }
+      tags:
+        - AI
+      security: []
+  /api/v1/ai/retrain-food:
+    get:
+      summary: 'Get Retrain Food'
+      description: "Activates retrain model for foods.\n\nReturns 200 OK."
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example: {  }
+                properties: {  }
+      tags:
+        - AI
+      security: []
+  /api/v1/ai/predictions:
+    post:
+      summary: 'Get predictions'
+      description: "User retrieves predictions based on a request.\n\nReturns 200 OK if database contains any prediction.\n\nReturns 503 SERVICE_UNAVAILABLE if request can't be processed."
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  persons: 3
+                  recipe: Cárnicos
+                properties:
+                  persons:
+                    type: integer
+                    example: 3
+                  recipe:
+                    type: string
+                    example: Cárnicos
+        503:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: 'El servicio no está disponible en este momento.'
+                properties:
+                  message:
+                    type: string
+                    example: 'El servicio no está disponible en este momento.'
+      tags:
+        - AI
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                date:
+                  type: string
+                  description: 'Must be a valid date in the format <code>Y-m-d H:i:s</code>.'
+                  example: '2022-05-27 21:19:10'
+                festive:
+                  type: boolean
+                  description: ''
+                  example: false
+              required:
+                - date
+                - festive
+      security: []
+  /api/v1/bookings:
+    get:
+      summary: 'Get all bookings'
+      description: "Retrieve all bookings from database.\n\nReturns 200 OK if database contains any booking."
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                example:
+                  -
+                    type: bookings
+                    id: 1
+                    attributes:
+                      name: 'foo booking'
+                      email: foo@foo.com
+                      phone: '+34 111 111 111'
+                      date: '2022/04/13 21:30:00'
+                      people: 6
+                      table: foo
+                      created_at: '2012/03/06 17:33:07'
+                      updated_at: '2012/03/06 17:33:07'
+                  -
+                    type: bookings
+                    id: 2
+                    attributes:
+                      name: 'foo booking'
+                      email: foo@foo.com
+                      phone: '+34 111 111 111'
+                      date: '2022/04/13 21:30:00'
+                      people: 6
+                      table: foo
+                      created_at: '2012/03/06 17:33:07'
+                      updated_at: '2012/03/06 17:33:07'
+      tags:
+        - Bookings
+      security: []
+    post:
+      summary: 'Create a booking'
+      description: "Endpoint for creating a booking.\n\nReturns 201 CREATED when created.\n\nReturns 422 UNPROCESSABLE_ENTITY if there are more than 50 bookings within a range of 2 hours before and 2 hours later from the current time."
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Bookings
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Must not be greater than 150 characters.'
+                  example: xdygcjwmiamdvakdxvttrkufffatwdaybpzxoiulruvatqhxtujffqaagrkvmqelqvmtmougwjwddqyoiwersclmydzngujwlmeqewyrpqgqxmcrtvwclcyjpjkog
+                email:
+                  type: string
+                  description: 'Must be a valid email address. Must not be greater than 150 characters.'
+                  example: busnmgmvkcphqllayejtaowvwgtibhlwdhsvngpwbqt
+                phone:
+                  type: string
+                  description: 'Must not be greater than 20 characters.'
+                  example: f
+                date:
+                  type: string
+                  description: 'Must be a valid date in the format <code>Y-m-d H:i:s</code>.'
+                  example: '2022-05-27 21:19:10'
+                people:
+                  type: integer
+                  description: ''
+                  example: 18
+                table:
+                  type: string
+                  description: 'Must not be greater than 150 characters.'
+                  example: vnzqxzoqgthejhuwzbmzkbgyprsumvvespe
+              required:
+                - name
+                - phone
+                - date
+                - people
+      security: []
+  '/api/v1/bookings/{booking}':
+    get:
+      summary: 'Get a single booking'
+      description: "User retrieves a single booking from database.\n\nReturns 200 OK if booking exists."
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Booking exists'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  type: bookings
+                  id: 1
+                  attributes:
+                    name: 'foo booking'
+                    email: foo@foo.com
+                    phone: '+34 111 111 111'
+                    date: '2022/04/13 21:30:00'
+                    people: 6
+                    table: foo
+                    created_at: '2012/03/06 17:33:07'
+                    updated_at: '2012/03/06 17:33:07'
+                properties:
+                  type:
+                    type: string
+                    example: bookings
+                  id:
+                    type: integer
+                    example: 1
+                  attributes:
+                    type: object
+                    example:
+                      name: 'foo booking'
+                      email: foo@foo.com
+                      phone: '+34 111 111 111'
+                      date: '2022/04/13 21:30:00'
+                      people: 6
+                      table: foo
+                      created_at: '2012/03/06 17:33:07'
+                      updated_at: '2012/03/06 17:33:07'
+      tags:
+        - Bookings
+      security: []
+    put:
+      summary: 'Update a booking'
+      description: "Endpoint for updating a booking.\n\nReturns 204 NO_CONTENT when updated.\n\nReturns 422 UNPROCESSABLE_ENTITY if there are more than 50 bookings within a range of 2 hours before and 2 hours later from the current time.\nThis only applies to the case of modifying booking's date parameter."
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Bookings
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Must not be greater than 150 characters.'
+                  example: pbuoksbtbftucknvajehknmoljytjgvvfq
+                email:
+                  type: string
+                  description: 'Must be a valid email address. Must not be greater than 150 characters.'
+                  example: zwtzbxayfqntnmgbcufcfsmvsbhvforqhivsrxtcwbjmpgxpzvwqjfqzxjaxjtezwzsquemzbjcfnrazvptywcazmojzhgscpulvmrmorcjiozsimlfiurzmhahajnxfirqveedoc
+                phone:
+                  type: string
+                  description: 'Must not be greater than 20 characters.'
+                  example: zvucjzygxcnvowzeqmuh
+                date:
+                  type: string
+                  description: 'Must be a valid date in the format <code>Y-m-d H:i:s</code>.'
+                  example: '2022-05-27 21:19:10'
+                people:
+                  type: integer
+                  description: ''
+                  example: 6
+                table:
+                  type: string
+                  description: 'Must not be greater than 150 characters.'
+                  example: aytfkicgbbehqoglbaihhaefzkpmsbxagajrrjfyavbnadxchusayrhspxvpm
+              required:
+                - name
+                - phone
+                - date
+                - people
+      security: []
+    delete:
+      summary: 'Delete a booking'
+      description: "Endpoint for deleting a booking.\n\nReturns 204 NO_CONTENT when deleted.\n\nReturns 409 CONFLICT if booking has 1 or more orders."
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Bookings
+      security: []
+    parameters:
+      -
+        in: path
+        name: booking
+        description: ''
+        example: 7
+        required: true
+        schema:
+          type: integer
+  /api/v1/user:
+    get:
+      summary: ''
+      description: ''
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Endpoints
+      security: []
+  /api/v1/food:
+    get:
+      summary: 'Return all foods'
+      description: "Retrieve all foods from database.\n\nReturns 200 OK if database contains any food."
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                example:
+                  -
+                    type: food
+                    id: 1
+                    attributes:
+                      name: foo
+                      units: 1
+                      created_at: '2022/04/13 21:30:00'
+                      updated_at: '2022/04/13 21:30:00'
+                  -
+                    type: food
+                    id: 2
+                    attributes:
+                      name: foo2
+                      units: 1
+                      created_at: '2022/04/13 21:30:00'
+                      updated_at: '2022/04/13 21:30:00'
+      tags:
+        - Food
+      security: []
+    post:
+      summary: 'Create a food'
+      description: "Endpoint for creating food.\n\nReturn 201 CREATED when created."
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Food
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Must not be greater than 250 characters.'
+                  example: noaxwhvpmupvuqgzppfrxlkpaujzvejwttifmbzyyfwqoxxvsygtiieggplgfmiwrldkkidkyyunvpfcvkijydpeczaklrnjtmalczljmoyzmntglwcrmgxtfxmyjxvharxjcpasvaqeajyrmrofjhqzdhyjzzsoppjxbjcrucoroceqavlkjgjvsdnzqx
+                units:
+                  type: string
+                  description: 'Must not be greater than 20 characters.'
+                  example: vpmdgti
+                type:
+                  type: string
+                  description: 'Must not be greater than 50 characters.'
+                  example: uejfrzfndekvjcmfjlhmopadlvyyrhotohzwsfurftkawjzqot
+              required:
+                - name
+                - units
+                - type
+      security: []
+  '/api/v1/food/{food}':
+    get:
+      summary: 'Get a single food'
+      description: "User retrieves a single food from database.\n\nReturns 200 OK if food exists."
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  type: food
+                  id: 1
+                  attributes:
+                    name: foo
+                    units: 1
+                    created_at: '2022/04/13 21:30:00'
+                    updated_at: '2022/04/13 21:30:00'
+                properties:
+                  type:
+                    type: string
+                    example: food
+                  id:
+                    type: integer
+                    example: 1
+                  attributes:
+                    type: object
+                    example:
+                      name: foo
+                      units: 1
+                      created_at: '2022/04/13 21:30:00'
+                      updated_at: '2022/04/13 21:30:00'
+      tags:
+        - Food
+      security: []
+    put:
+      summary: 'Update a food'
+      description: "Endpoint for updating food.\n\nReturns 204 NO_CONTENT when updated."
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Food
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Must not be greater than 250 characters.'
+                  example: aaaxajlwhttzciejfzcgrqzmzvumivclhnqxiimgrrdltjflapqemgfeccjewdnmnadsplqdlnbcyplfquhan
+                units:
+                  type: string
+                  description: 'Must not be greater than 20 characters.'
+                  example: hele
+                type:
+                  type: string
+                  description: 'Must not be greater than 50 characters.'
+                  example: ekjuphgscgxpindwujnkxxynoh
+              required:
+                - name
+                - units
+                - type
+      security: []
+    delete:
+      summary: 'Delete a food'
+      description: "Endpoint for deleting food.\n\nReturns 204 NO_CONTENT when deleted."
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Food
+      security: []
+    parameters:
+      -
+        in: path
+        name: food
+        description: ''
+        example: 7
+        required: true
+        schema:
+          type: integer
+  '/api/v1/food/{food}/stocks':
+    get:
+      summary: 'Single food''s stock'
+      description: "User retrieves all stock of a single food.\n\nReturns 200 OK if food exists and has stock."
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                example:
+                  -
+                    type: stocks
+                    id: 1
+                    food_id: 1
+                    food:
+                      type: food
+                      id: 1
+                      attributes:
+                        name: foo
+                        units: 1
+                        created_at: '2022/04/13 21:30:00'
+                        updated_at: '2022/04/13 21:30:00'
+                    attributes:
+                      quantity: '10'
+                      expiration_date: '2022/04/13 21:30:00'
+                      expired: false
+                      created_at: '2022/04/13 21:30:00'
+                      updated_at: '2022/04/13 21:30:00'
+      tags:
+        - Food
+      security: []
+    parameters:
+      -
+        in: path
+        name: food
+        description: ''
+        example: 7
+        required: true
+        schema:
+          type: integer
+  /api/v1/orders:
+    get:
+      summary: 'Get all orders'
+      description: "Retrieve all orders from database\n\nReturns 200 OK if database contains any order."
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                example:
+                  -
+                    type: order
+                    id: 1
+                    attributes:
+                      order_satus_id: 11
+                      booking_id: 22
+                      status:
+                        type: statuses
+                        id: 1
+                        attributes:
+                          status: 'En espera'
+                          created_at: '2012/03/06 17:33:07'
+                          updated_at: '2012/03/06 17:33:07'
+                      booking:
+                        type: bookings
+                        id: 1
+                        attributes:
+                          name: 'foo booking'
+                          email: foo@foo.com
+                          phone: '+34 111 111 111'
+                          date: '2022/04/13 21:30:00'
+                          people: 6
+                          table: foo
+                      recipes:
+                        -
+                          order_id: 1
+                          recipe_id: 1
+                          recipe_name: 'Estofado de ternera'
+                          quantity: 3
+                          price: 30.55
+                          created_at: '2012/03/06 17:33:07'
+                          updated_at: '2012/03/06 17:33:07'
+                        -
+                          order_id: 1
+                          recipe_id: 2
+                          recipe_name: 'Estofado de ternera'
+                          quantity: 3
+                          price: 28.99
+                          created_at: '2012/03/06 17:33:07'
+                          updated_at: '2012/03/06 17:33:07'
+                      created_at: '2012/03/06 17:33:07'
+                      updated_at: '2012/03/06 17:33:07'
+                  -
+                    type: order
+                    id: 1
+                    attributes:
+                      order_satus_id: 11
+                      booking_id: 22
+                      status:
+                        type: statuses
+                        id: 1
+                        attributes:
+                          status: Confirmada
+                          created_at: '2012/03/06 17:33:07'
+                          updated_at: '2012/03/06 17:33:07'
+                      booking:
+                        type: bookings
+                        id: 1
+                        attributes:
+                          name: 'foo booking'
+                          email: foo@foo.com
+                          phone: '+34 111 111 111'
+                          date: '2022/04/13 21:30:00'
+                          people: 6
+                          table: foo
+                      recipes:
+                        -
+                          order_id: 1
+                          recipe_id: 1
+                          recipe_name: 'Estofado de ternera'
+                          quantity: 3
+                          price: 30.55
+                          created_at: '2012/03/06 17:33:07'
+                          updated_at: '2012/03/06 17:33:07'
+                        -
+                          order_id: 1
+                          recipe_id: 2
+                          recipe_name: 'Estofado de ternera'
+                          quantity: 3
+                          price: 28.99
+                          created_at: '2012/03/06 17:33:07'
+                          updated_at: '2012/03/06 17:33:07'
+                      created_at: '2012/03/06 17:33:07'
+                      updated_at: '2012/03/06 17:33:07'
+      tags:
+        - Orders
+      security: []
+    post:
+      summary: 'Create an order.'
+      description: "Endpoint for creating an order.\n\nReturns 201 CREATED when created.\n\nReturns 422 UNPROCESSABLE_ENTITY if any recipe can not be prepared due to lack of stock."
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                example:
+                  -
+                    errors:
+                      stock:
+                        - 'Insufficient stock.'
+      tags:
+        - Orders
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                order_status_id:
+                  type: string
+                  description: ''
+                  example: sunt
+                booking_id:
+                  type: string
+                  description: ''
+                  example: corrupti
+                recipes:
+                  type: array
+                  description: 'Array of recipes.'
+                  example:
+                    - []
+                  items:
+                    type: object
+                    properties:
+                      recipe_id:
+                        type: string
+                        description: ''
+                        example: iusto
+                      quantity:
+                        type: integer
+                        description: ''
+                        example: 2
+                      price:
+                        type: number
+                        description: ''
+                        example: 47.35
+                    required:
+                      - recipe_id
+                      - quantity
+                      - price
+              required:
+                - booking_id
+      security: []
+  '/api/v1/orders/{order}':
+    get:
+      summary: 'Get a single order'
+      description: "User retrieves a single order from database.\n\nReturns 200 OK if order exists."
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Order exists'
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  type: order
+                  id: 1
+                  attributes:
+                    order_satus_id: 11
+                    booking_id: 22
+                    status:
+                      type: statuses
+                      id: 1
+                      attributes:
+                        status: Completada
+                        created_at: '2012/03/06 17:33:07'
+                        updated_at: '2012/03/06 17:33:07'
+                    booking:
+                      type: bookings
+                      id: 1
+                      attributes:
+                        name: 'foo booking'
+                        email: foo@foo.com
+                        phone: '+34 111 111 111'
+                        date: '2022/04/13 21:30:00'
+                        people: 6
+                        table: foo
+                    recipes:
+                      -
+                        order_id: 1
+                        recipe_id: 1
+                        recipe_name: 'Estofado de ternera'
+                        quantity: 3
+                        price: 30.55
+                        created_at: '2012/03/06 17:33:07'
+                        updated_at: '2012/03/06 17:33:07'
+                      -
+                        order_id: 1
+                        recipe_id: 2
+                        recipe_name: 'Estofado de ternera'
+                        quantity: 3
+                        price: 28.99
+                        created_at: '2012/03/06 17:33:07'
+                        updated_at: '2012/03/06 17:33:07'
+                    created_at: '2012/03/06 17:33:07'
+                    updated_at: '2012/03/06 17:33:07'
+                properties:
+                  type:
+                    type: string
+                    example: order
+                  id:
+                    type: integer
+                    example: 1
+                  attributes:
+                    type: object
+                    example:
+                      order_satus_id: 11
+                      booking_id: 22
+                      status:
+                        type: statuses
+                        id: 1
+                        attributes:
+                          status: Completada
+                          created_at: '2012/03/06 17:33:07'
+                          updated_at: '2012/03/06 17:33:07'
+                      booking:
+                        type: bookings
+                        id: 1
+                        attributes:
+                          name: 'foo booking'
+                          email: foo@foo.com
+                          phone: '+34 111 111 111'
+                          date: '2022/04/13 21:30:00'
+                          people: 6
+                          table: foo
+                      recipes:
+                        -
+                          order_id: 1
+                          recipe_id: 1
+                          recipe_name: 'Estofado de ternera'
+                          quantity: 3
+                          price: 30.55
+                          created_at: '2012/03/06 17:33:07'
+                          updated_at: '2012/03/06 17:33:07'
+                        -
+                          order_id: 1
+                          recipe_id: 2
+                          recipe_name: 'Estofado de ternera'
+                          quantity: 3
+                          price: 28.99
+                          created_at: '2012/03/06 17:33:07'
+                          updated_at: '2012/03/06 17:33:07'
+                      created_at: '2012/03/06 17:33:07'
+                      updated_at: '2012/03/06 17:33:07'
+      tags:
+        - Orders
+      security: []
+    put:
+      summary: 'Update an order'
+      description: "Endopoint for updating an order.\n\nReturns 204 NO_CONTENT when updated.\n\nReturns 422 UNPROCESSABLE_ENTITY if any order's recipe has no stock."
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                example:
+                  -
+                    errors:
+                      stock:
+                        - 'Insufficient stock.'
+      tags:
+        - Orders
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                order_status_id:
+                  type: string
+                  description: ''
+                  example: null
+                booking_id:
+                  type: string
+                  description: ''
+                  example: quidem
+                recipes:
+                  type: array
+                  description: 'Array of recipes'
+                  example:
+                    - []
+                  items:
+                    type: object
+                    properties:
+                      recipe_id:
+                        type: string
+                        description: ''
+                        example: et
+                      quantity:
+                        type: integer
+                        description: ''
+                        example: 19
+                      price:
+                        type: number
+                        description: ''
+                        example: 22.29415
+                    required:
+                      - recipe_id
+                      - quantity
+                      - price
+              required:
+                - booking_id
+      security: []
+    delete:
+      summary: 'Delete an order'
+      description: "Endpoint for deleting an order.\n\nReturns 204 NO_CONTENT when deleted.\n\nReturns 404 NOT_FOUND if the order does not exist."
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Orders
+      security: []
+    parameters:
+      -
+        in: path
+        name: order
+        description: 'Order ID.'
+        example: 6
+        required: true
+        schema:
+          type: integer
+  /api/v1/orders/status/waiting:
+    get:
+      summary: 'Waiting orders'
+      description: "Retrieve all waiting orders.\n\nReturns 200 OK if there is any waiting order in the database."
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                example:
+                  -
+                    type: order
+                    id: 1
+                    attributes:
+                      order_satus_id: 11
+                      booking_id: 22
+                      status:
+                        type: statuses
+                        id: 1
+                        attributes:
+                          status: 'En espera'
+                          created_at: '2012/03/06 17:33:07'
+                          updated_at: '2012/03/06 17:33:07'
+                      booking:
+                        type: bookings
+                        id: 1
+                        attributes:
+                          name: 'foo booking'
+                          email: foo@foo.com
+                          phone: '+34 111 111 111'
+                          date: '2022/04/13 21:30:00'
+                          people: 6
+                          table: foo
+                      recipes:
+                        -
+                          order_id: 1
+                          recipe_id: 1
+                          recipe_name: 'Estofado de ternera'
+                          quantity: 3
+                          price: 30.55
+                          created_at: '2012/03/06 17:33:07'
+                          updated_at: '2012/03/06 17:33:07'
+                        -
+                          order_id: 1
+                          recipe_id: 2
+                          recipe_name: 'Estofado de ternera'
+                          quantity: 3
+                          price: 28.99
+                          created_at: '2012/03/06 17:33:07'
+                          updated_at: '2012/03/06 17:33:07'
+                      created_at: '2012/03/06 17:33:07'
+                      updated_at: '2012/03/06 17:33:07'
+                  -
+                    type: order
+                    id: 1
+                    attributes:
+                      order_satus_id: 11
+                      booking_id: 22
+                      status:
+                        type: statuses
+                        id: 1
+                        attributes:
+                          status: 'En espera'
+                          created_at: '2012/03/06 17:33:07'
+                          updated_at: '2012/03/06 17:33:07'
+                      booking:
+                        type: bookings
+                        id: 1
+                        attributes:
+                          name: 'foo booking'
+                          email: foo@foo.com
+                          phone: '+34 111 111 111'
+                          date: '2022/04/13 21:30:00'
+                          people: 6
+                          table: foo
+                      recipes:
+                        -
+                          order_id: 1
+                          recipe_id: 1
+                          recipe_name: 'Estofado de ternera'
+                          quantity: 3
+                          price: 30.55
+                          created_at: '2012/03/06 17:33:07'
+                          updated_at: '2012/03/06 17:33:07'
+                        -
+                          order_id: 1
+                          recipe_id: 2
+                          recipe_name: 'Estofado de ternera'
+                          quantity: 3
+                          price: 28.99
+                          created_at: '2012/03/06 17:33:07'
+                          updated_at: '2012/03/06 17:33:07'
+                      created_at: '2012/03/06 17:33:07'
+                      updated_at: '2012/03/06 17:33:07'
+      tags:
+        - Orders
+      security: []
+  /api/v1/orders/status/confirmed:
+    get:
+      summary: 'Confirmed orders'
+      description: "Retrieve all confirmed orders.\n\nReturns 200 OK if there is any confirmed order in the database."
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                example:
+                  -
+                    type: order
+                    id: 1
+                    attributes:
+                      order_satus_id: 11
+                      booking_id: 22
+                      status:
+                        type: statuses
+                        id: 1
+                        attributes:
+                          status: Confirmada
+                          created_at: '2012/03/06 17:33:07'
+                          updated_at: '2012/03/06 17:33:07'
+                      booking:
+                        type: bookings
+                        id: 1
+                        attributes:
+                          name: 'foo booking'
+                          email: foo@foo.com
+                          phone: '+34 111 111 111'
+                          date: '2022/04/13 21:30:00'
+                          people: 6
+                          table: foo
+                      recipes:
+                        -
+                          order_id: 1
+                          recipe_id: 1
+                          recipe_name: 'Estofado de ternera'
+                          quantity: 3
+                          price: 30.55
+                          created_at: '2012/03/06 17:33:07'
+                          updated_at: '2012/03/06 17:33:07'
+                        -
+                          order_id: 1
+                          recipe_id: 2
+                          recipe_name: 'Estofado de ternera'
+                          quantity: 3
+                          price: 28.99
+                          created_at: '2012/03/06 17:33:07'
+                          updated_at: '2012/03/06 17:33:07'
+                      created_at: '2012/03/06 17:33:07'
+                      updated_at: '2012/03/06 17:33:07'
+                  -
+                    type: order
+                    id: 1
+                    attributes:
+                      order_satus_id: 11
+                      booking_id: 22
+                      status:
+                        type: statuses
+                        id: 1
+                        attributes:
+                          status: Confirmada
+                          created_at: '2012/03/06 17:33:07'
+                          updated_at: '2012/03/06 17:33:07'
+                      booking:
+                        type: bookings
+                        id: 1
+                        attributes:
+                          name: 'foo booking'
+                          email: foo@foo.com
+                          phone: '+34 111 111 111'
+                          date: '2022/04/13 21:30:00'
+                          people: 6
+                          table: foo
+                      recipes:
+                        -
+                          order_id: 1
+                          recipe_id: 1
+                          recipe_name: 'Estofado de ternera'
+                          quantity: 3
+                          price: 30.55
+                          created_at: '2012/03/06 17:33:07'
+                          updated_at: '2012/03/06 17:33:07'
+                        -
+                          order_id: 1
+                          recipe_id: 2
+                          recipe_name: 'Estofado de ternera'
+                          quantity: 3
+                          price: 28.99
+                          created_at: '2012/03/06 17:33:07'
+                          updated_at: '2012/03/06 17:33:07'
+                      created_at: '2012/03/06 17:33:07'
+                      updated_at: '2012/03/06 17:33:07'
+      tags:
+        - Orders
+      security: []
+  /api/v1/orders/status/cancelled:
+    get:
+      summary: 'Cancelled orders'
+      description: "Retrieve all cancelled orders.\n\nReturns 200 OK if there is any cancelled order in the database."
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                example:
+                  -
+                    type: order
+                    id: 1
+                    attributes:
+                      order_satus_id: 11
+                      booking_id: 22
+                      status:
+                        type: statuses
+                        id: 1
+                        attributes:
+                          status: Cancelada
+                          created_at: '2012/03/06 17:33:07'
+                          updated_at: '2012/03/06 17:33:07'
+                      booking:
+                        type: bookings
+                        id: 1
+                        attributes:
+                          name: 'foo booking'
+                          email: foo@foo.com
+                          phone: '+34 111 111 111'
+                          date: '2022/04/13 21:30:00'
+                          people: 6
+                          table: foo
+                      recipes:
+                        -
+                          order_id: 1
+                          recipe_id: 1
+                          recipe_name: 'Estofado de ternera'
+                          quantity: 3
+                          price: 30.55
+                          created_at: '2012/03/06 17:33:07'
+                          updated_at: '2012/03/06 17:33:07'
+                        -
+                          order_id: 1
+                          recipe_id: 2
+                          recipe_name: 'Estofado de ternera'
+                          quantity: 3
+                          price: 28.99
+                          created_at: '2012/03/06 17:33:07'
+                          updated_at: '2012/03/06 17:33:07'
+                      created_at: '2012/03/06 17:33:07'
+                      updated_at: '2012/03/06 17:33:07'
+                  -
+                    type: order
+                    id: 1
+                    attributes:
+                      order_satus_id: 11
+                      booking_id: 22
+                      status:
+                        type: statuses
+                        id: 1
+                        attributes:
+                          status: Cancelada
+                          created_at: '2012/03/06 17:33:07'
+                          updated_at: '2012/03/06 17:33:07'
+                      booking:
+                        type: bookings
+                        id: 1
+                        attributes:
+                          name: 'foo booking'
+                          email: foo@foo.com
+                          phone: '+34 111 111 111'
+                          date: '2022/04/13 21:30:00'
+                          people: 6
+                          table: foo
+                      recipes:
+                        -
+                          order_id: 1
+                          recipe_id: 1
+                          recipe_name: 'Estofado de ternera'
+                          quantity: 3
+                          price: 30.55
+                          created_at: '2012/03/06 17:33:07'
+                          updated_at: '2012/03/06 17:33:07'
+                        -
+                          order_id: 1
+                          recipe_id: 2
+                          recipe_name: 'Estofado de ternera'
+                          quantity: 3
+                          price: 28.99
+                          created_at: '2012/03/06 17:33:07'
+                          updated_at: '2012/03/06 17:33:07'
+                      created_at: '2012/03/06 17:33:07'
+                      updated_at: '2012/03/06 17:33:07'
+      tags:
+        - Orders
+      security: []
+  /api/v1/orders/status/in-process:
+    get:
+      summary: 'In Process orders'
+      description: "Retrieve all orders in process.\n\nReturns 200 OK if there is any order in process in the database."
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                example:
+                  -
+                    type: order
+                    id: 1
+                    attributes:
+                      order_satus_id: 11
+                      booking_id: 22
+                      status:
+                        type: statuses
+                        id: 1
+                        attributes:
+                          status: 'En proceso'
+                          created_at: '2012/03/06 17:33:07'
+                          updated_at: '2012/03/06 17:33:07'
+                      booking:
+                        type: bookings
+                        id: 1
+                        attributes:
+                          name: 'foo booking'
+                          email: foo@foo.com
+                          phone: '+34 111 111 111'
+                          date: '2022/04/13 21:30:00'
+                          people: 6
+                          table: foo
+                      recipes:
+                        -
+                          order_id: 1
+                          recipe_id: 1
+                          recipe_name: 'Estofado de ternera'
+                          quantity: 3
+                          price: 30.55
+                          created_at: '2012/03/06 17:33:07'
+                          updated_at: '2012/03/06 17:33:07'
+                        -
+                          order_id: 1
+                          recipe_id: 2
+                          recipe_name: 'Estofado de ternera'
+                          quantity: 3
+                          price: 28.99
+                          created_at: '2012/03/06 17:33:07'
+                          updated_at: '2012/03/06 17:33:07'
+                      created_at: '2012/03/06 17:33:07'
+                      updated_at: '2012/03/06 17:33:07'
+                  -
+                    type: order
+                    id: 1
+                    attributes:
+                      order_satus_id: 11
+                      booking_id: 22
+                      status:
+                        type: statuses
+                        id: 1
+                        attributes:
+                          status: 'En proceso'
+                          created_at: '2012/03/06 17:33:07'
+                          updated_at: '2012/03/06 17:33:07'
+                      booking:
+                        type: bookings
+                        id: 1
+                        attributes:
+                          name: 'foo booking'
+                          email: foo@foo.com
+                          phone: '+34 111 111 111'
+                          date: '2022/04/13 21:30:00'
+                          people: 6
+                          table: foo
+                      recipes:
+                        -
+                          order_id: 1
+                          recipe_id: 1
+                          recipe_name: 'Estofado de ternera'
+                          quantity: 3
+                          price: 30.55
+                          created_at: '2012/03/06 17:33:07'
+                          updated_at: '2012/03/06 17:33:07'
+                        -
+                          order_id: 1
+                          recipe_id: 2
+                          recipe_name: 'Estofado de ternera'
+                          quantity: 3
+                          price: 28.99
+                          created_at: '2012/03/06 17:33:07'
+                          updated_at: '2012/03/06 17:33:07'
+                      created_at: '2012/03/06 17:33:07'
+                      updated_at: '2012/03/06 17:33:07'
+      tags:
+        - Orders
+      security: []
+  /api/v1/orders/status/delivered:
+    get:
+      summary: 'Delivered orders'
+      description: "Retrieve all delivered orders.\n\nReturns 200 OK if there is any delivered order in the database."
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                example:
+                  -
+                    type: order
+                    id: 1
+                    attributes:
+                      order_satus_id: 11
+                      booking_id: 22
+                      status:
+                        type: statuses
+                        id: 1
+                        attributes:
+                          status: Entregada
+                          created_at: '2012/03/06 17:33:07'
+                          updated_at: '2012/03/06 17:33:07'
+                      booking:
+                        type: bookings
+                        id: 1
+                        attributes:
+                          name: 'foo booking'
+                          email: foo@foo.com
+                          phone: '+34 111 111 111'
+                          date: '2022/04/13 21:30:00'
+                          people: 6
+                          table: foo
+                      recipes:
+                        -
+                          order_id: 1
+                          recipe_id: 1
+                          recipe_name: 'Estofado de ternera'
+                          quantity: 3
+                          price: 30.55
+                          created_at: '2012/03/06 17:33:07'
+                          updated_at: '2012/03/06 17:33:07'
+                        -
+                          order_id: 1
+                          recipe_id: 2
+                          recipe_name: 'Estofado de ternera'
+                          quantity: 3
+                          price: 28.99
+                          created_at: '2012/03/06 17:33:07'
+                          updated_at: '2012/03/06 17:33:07'
+                      created_at: '2012/03/06 17:33:07'
+                      updated_at: '2012/03/06 17:33:07'
+                  -
+                    type: order
+                    id: 1
+                    attributes:
+                      order_satus_id: 11
+                      booking_id: 22
+                      status:
+                        type: statuses
+                        id: 1
+                        attributes:
+                          status: Entregada
+                          created_at: '2012/03/06 17:33:07'
+                          updated_at: '2012/03/06 17:33:07'
+                      booking:
+                        type: bookings
+                        id: 1
+                        attributes:
+                          name: 'foo booking'
+                          email: foo@foo.com
+                          phone: '+34 111 111 111'
+                          date: '2022/04/13 21:30:00'
+                          people: 6
+                          table: foo
+                      recipes:
+                        -
+                          order_id: 1
+                          recipe_id: 1
+                          recipe_name: 'Estofado de ternera'
+                          quantity: 3
+                          price: 30.55
+                          created_at: '2012/03/06 17:33:07'
+                          updated_at: '2012/03/06 17:33:07'
+                        -
+                          order_id: 1
+                          recipe_id: 2
+                          recipe_name: 'Estofado de ternera'
+                          quantity: 3
+                          price: 28.99
+                          created_at: '2012/03/06 17:33:07'
+                          updated_at: '2012/03/06 17:33:07'
+                      created_at: '2012/03/06 17:33:07'
+                      updated_at: '2012/03/06 17:33:07'
+      tags:
+        - Orders
+      security: []
+  /api/v1/orders/status/paid:
+    get:
+      summary: 'Paid orders'
+      description: "Retrieve all paid orders.\n\nReturns 200 OK if there is any paid order in the database."
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                example:
+                  -
+                    type: order
+                    id: 1
+                    attributes:
+                      order_satus_id: 11
+                      booking_id: 22
+                      status:
+                        type: statuses
+                        id: 1
+                        attributes:
+                          status: Pagada
+                          created_at: '2012/03/06 17:33:07'
+                          updated_at: '2012/03/06 17:33:07'
+                      booking:
+                        type: bookings
+                        id: 1
+                        attributes:
+                          name: 'foo booking'
+                          email: foo@foo.com
+                          phone: '+34 111 111 111'
+                          date: '2022/04/13 21:30:00'
+                          people: 6
+                          table: foo
+                      recipes:
+                        -
+                          order_id: 1
+                          recipe_id: 1
+                          recipe_name: 'Estofado de ternera'
+                          quantity: 3
+                          price: 30.55
+                          created_at: '2012/03/06 17:33:07'
+                          updated_at: '2012/03/06 17:33:07'
+                        -
+                          order_id: 1
+                          recipe_id: 2
+                          recipe_name: 'Estofado de ternera'
+                          quantity: 3
+                          price: 28.99
+                          created_at: '2012/03/06 17:33:07'
+                          updated_at: '2012/03/06 17:33:07'
+                      created_at: '2012/03/06 17:33:07'
+                      updated_at: '2012/03/06 17:33:07'
+                  -
+                    type: order
+                    id: 1
+                    attributes:
+                      order_satus_id: 11
+                      booking_id: 22
+                      status:
+                        type: statuses
+                        id: 1
+                        attributes:
+                          status: Pagada
+                          created_at: '2012/03/06 17:33:07'
+                          updated_at: '2012/03/06 17:33:07'
+                      booking:
+                        type: bookings
+                        id: 1
+                        attributes:
+                          name: 'foo booking'
+                          email: foo@foo.com
+                          phone: '+34 111 111 111'
+                          date: '2022/04/13 21:30:00'
+                          people: 6
+                          table: foo
+                      recipes:
+                        -
+                          order_id: 1
+                          recipe_id: 1
+                          recipe_name: 'Estofado de ternera'
+                          quantity: 3
+                          price: 30.55
+                          created_at: '2012/03/06 17:33:07'
+                          updated_at: '2012/03/06 17:33:07'
+                        -
+                          order_id: 1
+                          recipe_id: 2
+                          recipe_name: 'Estofado de ternera'
+                          quantity: 3
+                          price: 28.99
+                          created_at: '2012/03/06 17:33:07'
+                          updated_at: '2012/03/06 17:33:07'
+                      created_at: '2012/03/06 17:33:07'
+                      updated_at: '2012/03/06 17:33:07'
+      tags:
+        - Orders
+      security: []
+  /api/v1/recipes:
+    get:
+      summary: 'Get all recipes'
+      description: "Retrieve all recipes from database.\n\nReturns 200 OK if database contains any recipe."
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                example:
+                  -
+                    type: recipes
+                    id: 1
+                    attributes:
+                      name: 'Estofado de ternera'
+                      price: 15
+                      type: recipe_type
+                      food_type: food_type
+                      available: true
+                      food:
+                        type: food
+                        id: 1
+                        attributes:
+                          name: ternera
+                          units: kg
+                          quantity: 15
+                          created_at: '2012/03/06 17:33:07'
+                          updated_at: '2012/03/06 17:33:07'
+                      created_at: '2012/03/06 17:33:07'
+                      updated_at: '2012/03/06 17:33:07'
+                  -
+                    type: recipes
+                    id: 1
+                    attributes:
+                      name: 'Estofado de ternera'
+                      price: 15
+                      type: recipe_type
+                      food_type: food_type
+                      available: true
+                      food:
+                        type: food
+                        id: 1
+                        attributes:
+                          name: ternera
+                          units: kg
+                          quantity: 15
+                          created_at: '2012/03/06 17:33:07'
+                          updated_at: '2012/03/06 17:33:07'
+                      created_at: '2012/03/06 17:33:07'
+                      updated_at: '2012/03/06 17:33:07'
+      tags:
+        - Recipes
+      security: []
+    post:
+      summary: 'Create a recipe'
+      description: "Endpoint for creating a recipe.\n\nReturns 201 CREATED when created."
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Recipes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Must not be greater than 250 characters.'
+                  example: zfhjjlomkwafoxlbzuclmbxurwhcfg
+                price:
+                  type: number
+                  description: ''
+                  example: 252.931
+                type:
+                  type: integer
+                  description: ''
+                  example: 3
+                food_type:
+                  type: integer
+                  description: ''
+                  example: 12
+                available:
+                  type: boolean
+                  description: ''
+                  example: true
+                food:
+                  type: array
+                  description: ''
+                  example:
+                    - []
+                  items:
+                    type: object
+                    properties:
+                      food_id:
+                        type: string
+                        description: ''
+                        example: aut
+                      quantity:
+                        type: number
+                        description: ''
+                        example: 0.0
+                    required:
+                      - food_id
+                      - quantity
+              required:
+                - name
+                - price
+                - type
+                - food_type
+      security: []
+  '/api/v1/recipes/{recipe}':
+    get:
+      summary: 'Get a single recipe'
+      description: "User retrieves a single recipe from database.\n\nReturns 200 OK if recipe exists."
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  type: recipes
+                  id: 1
+                  attributes:
+                    name: 'Estofado de ternera'
+                    price: 15
+                    type: recipe_type
+                    food_type: food_type
+                    available: true
+                    food:
+                      type: food
+                      id: 1
+                      attributes:
+                        name: ternera
+                        units: kg
+                        quantity: 15
+                        created_at: '2012/03/06 17:33:07'
+                        updated_at: '2012/03/06 17:33:07'
+                    created_at: '2012/03/06 17:33:07'
+                    updated_at: '2012/03/06 17:33:07'
+                properties:
+                  type:
+                    type: string
+                    example: recipes
+                  id:
+                    type: integer
+                    example: 1
+                  attributes:
+                    type: object
+                    example:
+                      name: 'Estofado de ternera'
+                      price: 15
+                      type: recipe_type
+                      food_type: food_type
+                      available: true
+                      food:
+                        type: food
+                        id: 1
+                        attributes:
+                          name: ternera
+                          units: kg
+                          quantity: 15
+                          created_at: '2012/03/06 17:33:07'
+                          updated_at: '2012/03/06 17:33:07'
+                      created_at: '2012/03/06 17:33:07'
+                      updated_at: '2012/03/06 17:33:07'
+      tags:
+        - Recipes
+      security: []
+    put:
+      summary: 'Update a recipe'
+      description: "Endpoint for creating a recipe.\n\nReturns 204 NO_CONTENT when updated."
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Recipes
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  description: 'Must not be greater than 250 characters.'
+                  example: rxxeicojefughoaqcqlssvgafvijehgqhozcoqebtfedkshnpxsagnvhghepgjiwabbhutmspihphesnxflhge
+                price:
+                  type: number
+                  description: ''
+                  example: 8117.353
+                type:
+                  type: integer
+                  description: ''
+                  example: 8
+                food_type:
+                  type: integer
+                  description: ''
+                  example: 13
+                available:
+                  type: boolean
+                  description: ''
+                  example: true
+                food:
+                  type: array
+                  description: ''
+                  example:
+                    - []
+                  items:
+                    type: object
+                    properties:
+                      food_id:
+                        type: string
+                        description: ''
+                        example: sint
+                      quantity:
+                        type: number
+                        description: ''
+                        example: 5984012.006192
+                    required:
+                      - food_id
+                      - quantity
+              required:
+                - name
+                - price
+                - type
+                - food_type
+      security: []
+    delete:
+      summary: 'Delete a recipe'
+      description: "Endpoint for deleting a recipe.\n\nReturns 204 NO_CONTENT when deleted.\n\nReturns 409 CONFLICT if the recipe exists in 1 or more orders."
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Recipes
+      security: []
+    parameters:
+      -
+        in: path
+        name: recipe
+        description: ''
+        example: 20
+        required: true
+        schema:
+          type: integer
+  /api/v1/stocks:
+    get:
+      summary: 'Get all stocks'
+      description: "Retrieve all stocks from database.\n\nReturns 200 OK if database contains any stock."
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                example:
+                  -
+                    type: stocks
+                    id: 1
+                    attributes:
+                      quantity: 7
+                      expiration_date: '2022/04/13 21:30:00'
+                      expired: false
+                      food_id: 5
+                      created_at: '2022/04/13 21:30:00'
+                      updated_at: '2022/04/13 21:30:00'
+                  -
+                    type: stocks
+                    id: 2
+                    attributes:
+                      quantity: 8
+                      expiration_date: '2022/04/13 21:30:00'
+                      expired: true
+                      food_id: 6
+                      created_at: '2022/04/13 21:30:00'
+                      updated_at: '2022/04/13 21:30:00'
+      tags:
+        - Stock
+      security: []
+    post:
+      summary: 'Create a stock'
+      description: "Endpoint for creating a stock.\n\nReturns 201 CREATED when created."
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Stock
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                quantity:
+                  type: number
+                  description: ''
+                  example: 19738475.72
+                expiration_date:
+                  type: string
+                  description: 'Must be a valid date in the format <code>Y-m-d H:i:s</code>.'
+                  example: '2022-05-27 21:19:06'
+                expired:
+                  type: boolean
+                  description: ''
+                  example: false
+                food_id:
+                  type: string
+                  description: ''
+                  example: harum
+              required:
+                - quantity
+                - expiration_date
+                - food_id
+      security: []
+  '/api/v1/stocks/{stock}':
+    get:
+      summary: 'Get a single stock'
+      description: "User retrieves a single stock from database.\n\nReturns 200 OK if stock exists."
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  type: stocks
+                  id: 1
+                  attributes:
+                    quantity: 7
+                    expiration_date: '2022/04/13 21:30:00'
+                    expired: false
+                    food_id: 5
+                    created_at: '2022/04/13 21:30:00'
+                    updated_at: '2022/04/13 21:30:00'
+                properties:
+                  type:
+                    type: string
+                    example: stocks
+                  id:
+                    type: integer
+                    example: 1
+                  attributes:
+                    type: object
+                    example:
+                      quantity: 7
+                      expiration_date: '2022/04/13 21:30:00'
+                      expired: false
+                      food_id: 5
+                      created_at: '2022/04/13 21:30:00'
+                      updated_at: '2022/04/13 21:30:00'
+      tags:
+        - Stock
+      security: []
+    put:
+      summary: 'Update a stock'
+      description: "Endpoint for updating a stock.\n\nReturns 204 NO_CONTENT when updated."
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Stock
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                quantity:
+                  type: number
+                  description: ''
+                  example: 4786662.912609
+                expiration_date:
+                  type: string
+                  description: 'Must be a valid date in the format <code>Y-m-d H:i:s</code>.'
+                  example: '2022-05-27 21:19:06'
+                expired:
+                  type: boolean
+                  description: ''
+                  example: false
+                food_id:
+                  type: string
+                  description: ''
+                  example: sunt
+              required:
+                - quantity
+                - expiration_date
+                - food_id
+      security: []
+    delete:
+      summary: 'Delete a stock'
+      description: "Endpoint for deleting a stock.\n\nReturns 204 NO_CONTENT when deleted."
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses: {  }
+      tags:
+        - Stock
+      security: []
+    parameters:
+      -
+        in: path
+        name: stock
+        description: ''
+        example: 10
+        required: true
+        schema:
+          type: integer
+  /api/v1/stocks/expiration/expired:
+    get:
+      summary: 'Get all expired stocks'
+      description: "Retrieve all expired stocks from database.\n\nReturns 200 OK if database contains any expired stock."
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Stock
+      security: []
+  /api/v1/stocks/expiration/non-expired:
+    get:
+      summary: 'Get all non-expired stocks'
+      description: "Retrieve all non-expired stocks from database.\n\nReturns 200 OK if database contains any non-expired stock."
+      parameters:
+        -
+          in: header
+          name: Content-Type
+          description: ''
+          example: application/json
+          schema:
+            type: string
+        -
+          in: header
+          name: Accept
+          description: ''
+          example: application/json
+          schema:
+            type: string
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  message: Unauthenticated.
+                properties:
+                  message:
+                    type: string
+                    example: Unauthenticated.
+      tags:
+        - Stock
+      security: []
+tags:
+  -
+    name: AI
+    description: "\nEndpoints for AI management"
+  -
+    name: Bookings
+    description: "\nEndpoints for bookings management"
+  -
+    name: Endpoints
+    description: ''
+  -
+    name: Food
+    description: "\nEndpoints for food management"
+  -
+    name: Orders
+    description: "\nEndpoints for orders management"
+  -
+    name: Recipes
+    description: "\nEndpoints for recipes management"
+  -
+    name: Stock
+    description: "\nEndpoints for stock management"

@@ -1,0 +1,1586 @@
+{
+    "variable": [
+        {
+            "id": "baseUrl",
+            "key": "baseUrl",
+            "type": "string",
+            "name": "string",
+            "value": "http:\/\/localhost"
+        }
+    ],
+    "info": {
+        "name": "Smart Restaurant Manager",
+        "_postman_id": "4d63bf36-ed46-464b-b4a5-622a18188752",
+        "description": "",
+        "schema": "https:\/\/schema.getpostman.com\/json\/collection\/v2.1.0\/collection.json"
+    },
+    "item": [
+        {
+            "name": "AI",
+            "description": "\nEndpoints for AI management",
+            "item": [
+                {
+                    "name": "Get retrain data",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/ai\/data",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/ai\/data"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "User retrieves all retrain data\n\nReturns 200 OK if database contains any data.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "[{\"date\": \"2022\/04\/13 21:30:00\", \"food_types\": [\"type1\", \"type2\"],\n\"festive\": true},\n{\"date\": \"2022\/04\/13 21:30:00\", \"food_types\": [\"type3\", \"type4\"],\n\"festive\": true}\n]",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Get Retrain Customers",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/ai\/retrain-customers",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/ai\/retrain-customers"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Activates retrain model for customers.\n\nReturns 200 OK.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "x-ratelimit-limit",
+                                    "value": "60"
+                                },
+                                {
+                                    "key": "x-ratelimit-remaining",
+                                    "value": "59"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 200,
+                            "body": "{}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Get Retrain Food",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/ai\/retrain-food",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/ai\/retrain-food"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Activates retrain model for foods.\n\nReturns 200 OK.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "x-ratelimit-limit",
+                                    "value": "60"
+                                },
+                                {
+                                    "key": "x-ratelimit-remaining",
+                                    "value": "58"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 200,
+                            "body": "{}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Get predictions",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/ai\/predictions",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/ai\/predictions"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"date\":\"2022-05-27 21:19:10\",\"festive\":false}"
+                        },
+                        "description": "User retrieves predictions based on a request.\n\nReturns 200 OK if database contains any prediction.\n\nReturns 503 SERVICE_UNAVAILABLE if request can't be processed.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{ \"persons\": 3, \"recipe\":\"C\u00e1rnicos\" }",
+                            "name": ""
+                        },
+                        {
+                            "header": [],
+                            "code": 503,
+                            "body": "{ \"message\": \"El servicio no est\u00e1 disponible en este momento.\" }",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Bookings",
+            "description": "\nEndpoints for bookings management",
+            "item": [
+                {
+                    "name": "Get all bookings",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/bookings",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/bookings"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Retrieve all bookings from database.\n\nReturns 200 OK if database contains any booking.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "[{\"type\": \"bookings\", \"id\": 1, \"attributes\": {\"name\":\"foo booking\", \"email\": \"foo@foo.com\",\n\"phone\": \"+34 111 111 111\", \"date\": \"2022\/04\/13 21:30:00\",\n\"people\": 6, \"table\": \"foo\", \"created_at\": \"2012\/03\/06 17:33:07\",\n\"updated_at\": \"2012\/03\/06 17:33:07\"}},\n{\"type\": \"bookings\", \"id\": 2, \"attributes\": {\"name\":\"foo booking\", \"email\": \"foo@foo.com\",\n\"phone\": \"+34 111 111 111\", \"date\": \"2022\/04\/13 21:30:00\",\n\"people\": 6, \"table\": \"foo\", \"created_at\": \"2012\/03\/06 17:33:07\",\n\"updated_at\": \"2012\/03\/06 17:33:07\"}}]",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Create a booking",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/bookings",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/bookings"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"xdygcjwmiamdvakdxvttrkufffatwdaybpzxoiulruvatqhxtujffqaagrkvmqelqvmtmougwjwddqyoiwersclmydzngujwlmeqewyrpqgqxmcrtvwclcyjpjkog\",\"email\":\"busnmgmvkcphqllayejtaowvwgtibhlwdhsvngpwbqt\",\"phone\":\"f\",\"date\":\"2022-05-27 21:19:10\",\"people\":18,\"table\":\"vnzqxzoqgthejhuwzbmzkbgyprsumvvespe\"}"
+                        },
+                        "description": "Endpoint for creating a booking.\n\nReturns 201 CREATED when created.\n\nReturns 422 UNPROCESSABLE_ENTITY if there are more than 50 bookings within a range of 2 hours before and 2 hours later from the current time.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get a single booking",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/bookings\/:booking",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/bookings\/:booking",
+                            "variable": [
+                                {
+                                    "id": "booking",
+                                    "key": "booking",
+                                    "value": "7",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "User retrieves a single booking from database.\n\nReturns 200 OK if booking exists.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"type\": \"bookings\", \"id\": 1, \"attributes\": {\"name\":\"foo booking\", \"email\": \"foo@foo.com\",\n\"phone\": \"+34 111 111 111\", \"date\": \"2022\/04\/13 21:30:00\",\n\"people\": 6, \"table\": \"foo\", \"created_at\": \"2012\/03\/06 17:33:07\",\n\"updated_at\": \"2012\/03\/06 17:33:07\"}}",
+                            "name": "Booking exists"
+                        }
+                    ]
+                },
+                {
+                    "name": "Update a booking",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/bookings\/:booking",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/bookings\/:booking",
+                            "variable": [
+                                {
+                                    "id": "booking",
+                                    "key": "booking",
+                                    "value": "7",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"pbuoksbtbftucknvajehknmoljytjgvvfq\",\"email\":\"zwtzbxayfqntnmgbcufcfsmvsbhvforqhivsrxtcwbjmpgxpzvwqjfqzxjaxjtezwzsquemzbjcfnrazvptywcazmojzhgscpulvmrmorcjiozsimlfiurzmhahajnxfirqveedoc\",\"phone\":\"zvucjzygxcnvowzeqmuh\",\"date\":\"2022-05-27 21:19:10\",\"people\":6,\"table\":\"aytfkicgbbehqoglbaihhaefzkpmsbxagajrrjfyavbnadxchusayrhspxvpm\"}"
+                        },
+                        "description": "Endpoint for updating a booking.\n\nReturns 204 NO_CONTENT when updated.\n\nReturns 422 UNPROCESSABLE_ENTITY if there are more than 50 bookings within a range of 2 hours before and 2 hours later from the current time.\nThis only applies to the case of modifying booking's date parameter.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Delete a booking",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/bookings\/:booking",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/bookings\/:booking",
+                            "variable": [
+                                {
+                                    "id": "booking",
+                                    "key": "booking",
+                                    "value": "7",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Endpoint for deleting a booking.\n\nReturns 204 NO_CONTENT when deleted.\n\nReturns 409 CONFLICT if booking has 1 or more orders.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Endpoints",
+            "description": "",
+            "item": [
+                {
+                    "name": "api\/v1\/user",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/user",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/user"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Food",
+            "description": "\nEndpoints for food management",
+            "item": [
+                {
+                    "name": "Return all foods",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/food",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/food"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Retrieve all foods from database.\n\nReturns 200 OK if database contains any food.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "[{\"type\": \"food\", \"id\": 1, \"attributes\": {\"name\":\"foo\", \"units\": 1,\n\"created_at\": \"2022\/04\/13 21:30:00\", \"updated_at\": \"2022\/04\/13 21:30:00\"}},\n{\"type\": \"food\", \"id\": 2, \"attributes\": {\"name\":\"foo2\", \"units\": 1,\n\"created_at\": \"2022\/04\/13 21:30:00\", \"updated_at\": \"2022\/04\/13 21:30:00\"}}]",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Create a food",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/food",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/food"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"noaxwhvpmupvuqgzppfrxlkpaujzvejwttifmbzyyfwqoxxvsygtiieggplgfmiwrldkkidkyyunvpfcvkijydpeczaklrnjtmalczljmoyzmntglwcrmgxtfxmyjxvharxjcpasvaqeajyrmrofjhqzdhyjzzsoppjxbjcrucoroceqavlkjgjvsdnzqx\",\"units\":\"vpmdgti\",\"type\":\"uejfrzfndekvjcmfjlhmopadlvyyrhotohzwsfurftkawjzqot\"}"
+                        },
+                        "description": "Endpoint for creating food.\n\nReturn 201 CREATED when created.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get a single food",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/food\/:food",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/food\/:food",
+                            "variable": [
+                                {
+                                    "id": "food",
+                                    "key": "food",
+                                    "value": "7",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "User retrieves a single food from database.\n\nReturns 200 OK if food exists.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"type\": \"food\", \"id\": 1, \"attributes\": {\"name\":\"foo\", \"units\": 1,\n\"created_at\": \"2022\/04\/13 21:30:00\", \"updated_at\": \"2022\/04\/13 21:30:00\"}}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Update a food",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/food\/:food",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/food\/:food",
+                            "variable": [
+                                {
+                                    "id": "food",
+                                    "key": "food",
+                                    "value": "7",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"aaaxajlwhttzciejfzcgrqzmzvumivclhnqxiimgrrdltjflapqemgfeccjewdnmnadsplqdlnbcyplfquhan\",\"units\":\"hele\",\"type\":\"ekjuphgscgxpindwujnkxxynoh\"}"
+                        },
+                        "description": "Endpoint for updating food.\n\nReturns 204 NO_CONTENT when updated.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Delete a food",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/food\/:food",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/food\/:food",
+                            "variable": [
+                                {
+                                    "id": "food",
+                                    "key": "food",
+                                    "value": "7",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Endpoint for deleting food.\n\nReturns 204 NO_CONTENT when deleted.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Single food's stock",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/food\/:food\/stocks",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/food\/:food\/stocks",
+                            "variable": [
+                                {
+                                    "id": "food",
+                                    "key": "food",
+                                    "value": "7",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "User retrieves all stock of a single food.\n\nReturns 200 OK if food exists and has stock.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "[{\"type\": \"stocks\", \"id\": 1, \"food_id\": 1, \"food\": {\"type\": \"food\", \"id\": 1, \"attributes\": {\"name\":\"foo\", \"units\": 1,\n\"created_at\": \"2022\/04\/13 21:30:00\", \"updated_at\": \"2022\/04\/13 21:30:00\"}}, \"attributes\": {\"quantity\":\"10\", \"expiration_date\":\n\"2022\/04\/13 21:30:00\", \"expired\": false, \"created_at\": \"2022\/04\/13 21:30:00\", \"updated_at\": \"2022\/04\/13 21:30:00\"}}]",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Orders",
+            "description": "\nEndpoints for orders management",
+            "item": [
+                {
+                    "name": "Get all orders",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/orders",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/orders"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Retrieve all orders from database\n\nReturns 200 OK if database contains any order.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "[{\"type\": \"order\", \"id\": 1, \"attributes\": {\n\"order_satus_id\": 11, \"booking_id\": 22, \"status\": {\n\"type\": \"statuses\", \"id\": 1, \"attributes\": {\n\"status\": \"En espera\", \"created_at\": \"2012\/03\/06 17:33:07\", \"updated_at\": \"2012\/03\/06 17:33:07\"}},\n\"booking\": {\"type\": \"bookings\", \"id\": 1, \"attributes\": {\"name\":\"foo booking\", \"email\": \"foo@foo.com\",\n\"phone\": \"+34 111 111 111\", \"date\": \"2022\/04\/13 21:30:00\",\n\"people\": 6, \"table\": \"foo\"}},\n\"recipes\": [{\"order_id\": 1, \"recipe_id\": 1, \"recipe_name\": \"Estofado de ternera\", \"quantity\": 3,\n\"price\": 30.55, \"created_at\": \"2012\/03\/06 17:33:07\", \"updated_at\": \"2012\/03\/06 17:33:07\"},\n{\"order_id\": 1, \"recipe_id\": 2, \"recipe_name\": \"Estofado de ternera\", \"quantity\": 3, \"price\": 28.99,\n\"created_at\": \"2012\/03\/06 17:33:07\",\n\"updated_at\": \"2012\/03\/06 17:33:07\"}],\n\"created_at\": \"2012\/03\/06 17:33:07\", \"updated_at\": \"2012\/03\/06 17:33:07\"\n}},\n{\"type\": \"order\", \"id\": 1, \"attributes\": {\n\"order_satus_id\": 11, \"booking_id\": 22, \"status\": {\n\"type\": \"statuses\", \"id\": 1, \"attributes\": {\n\"status\": \"Confirmada\", \"created_at\": \"2012\/03\/06 17:33:07\", \"updated_at\": \"2012\/03\/06 17:33:07\"}},\n\"booking\": {\"type\": \"bookings\", \"id\": 1, \"attributes\": {\"name\":\"foo booking\", \"email\": \"foo@foo.com\",\n\"phone\": \"+34 111 111 111\", \"date\": \"2022\/04\/13 21:30:00\",\n\"people\": 6, \"table\": \"foo\"}},\n\"recipes\": [{\"order_id\": 1, \"recipe_id\": 1, \"recipe_name\": \"Estofado de ternera\", \"quantity\": 3,\n\"price\": 30.55, \"created_at\": \"2012\/03\/06 17:33:07\", \"updated_at\": \"2012\/03\/06 17:33:07\"},\n{\"order_id\": 1, \"recipe_id\": 2, \"recipe_name\": \"Estofado de ternera\", \"quantity\": 3, \"price\": 28.99,\n\"created_at\": \"2012\/03\/06 17:33:07\",\n\"updated_at\": \"2012\/03\/06 17:33:07\"}],\n\"created_at\": \"2012\/03\/06 17:33:07\", \"updated_at\": \"2012\/03\/06 17:33:07\"\n}}]",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Create an order.",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/orders",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/orders"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"order_status_id\":\"sunt\",\"booking_id\":\"corrupti\",\"recipes\":[{\"recipe_id\":\"iusto\",\"quantity\":2,\"price\":47.35}]}"
+                        },
+                        "description": "Endpoint for creating an order.\n\nReturns 201 CREATED when created.\n\nReturns 422 UNPROCESSABLE_ENTITY if any recipe can not be prepared due to lack of stock.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "[ {\"errors\": {\"stock\": [\"Insufficient stock.\"]}} ]",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Get a single order",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/orders\/:order",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/orders\/:order",
+                            "variable": [
+                                {
+                                    "id": "order",
+                                    "key": "order",
+                                    "value": "6",
+                                    "description": "Order ID."
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "User retrieves a single order from database.\n\nReturns 200 OK if order exists.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"type\": \"order\", \"id\": 1, \"attributes\": {\n\"order_satus_id\": 11, \"booking_id\": 22, \"status\": {\n\"type\": \"statuses\", \"id\": 1, \"attributes\": {\n\"status\": \"Completada\", \"created_at\": \"2012\/03\/06 17:33:07\", \"updated_at\": \"2012\/03\/06 17:33:07\"}},\n\"booking\": {\"type\": \"bookings\", \"id\": 1, \"attributes\": {\"name\":\"foo booking\", \"email\": \"foo@foo.com\",\n\"phone\": \"+34 111 111 111\", \"date\": \"2022\/04\/13 21:30:00\",\n\"people\": 6, \"table\": \"foo\"}},\n\"recipes\": [{\"order_id\": 1, \"recipe_id\": 1, \"recipe_name\": \"Estofado de ternera\",\"quantity\": 3,\n\"price\": 30.55, \"created_at\": \"2012\/03\/06 17:33:07\", \"updated_at\": \"2012\/03\/06 17:33:07\"},\n{\"order_id\": 1, \"recipe_id\": 2, \"recipe_name\": \"Estofado de ternera\", \"quantity\": 3, \"price\": 28.99,\n\"created_at\": \"2012\/03\/06 17:33:07\",\n\"updated_at\": \"2012\/03\/06 17:33:07\"}],\n\"created_at\": \"2012\/03\/06 17:33:07\", \"updated_at\": \"2012\/03\/06 17:33:07\"\n}}",
+                            "name": "Order exists"
+                        }
+                    ]
+                },
+                {
+                    "name": "Update an order",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/orders\/:order",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/orders\/:order",
+                            "variable": [
+                                {
+                                    "id": "order",
+                                    "key": "order",
+                                    "value": "13",
+                                    "description": "Order ID."
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"booking_id\":\"quidem\",\"recipes\":[{\"recipe_id\":\"et\",\"quantity\":19,\"price\":22.29415}]}"
+                        },
+                        "description": "Endopoint for updating an order.\n\nReturns 204 NO_CONTENT when updated.\n\nReturns 422 UNPROCESSABLE_ENTITY if any order's recipe has no stock.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 422,
+                            "body": "[ {\"errors\": {\"stock\": [\"Insufficient stock.\"]}} ]",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Delete an order",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/orders\/:order",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/orders\/:order",
+                            "variable": [
+                                {
+                                    "id": "order",
+                                    "key": "order",
+                                    "value": "11",
+                                    "description": "Order ID."
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Endpoint for deleting an order.\n\nReturns 204 NO_CONTENT when deleted.\n\nReturns 404 NOT_FOUND if the order does not exist.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Waiting orders",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/orders\/status\/waiting",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/orders\/status\/waiting"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Retrieve all waiting orders.\n\nReturns 200 OK if there is any waiting order in the database.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "[{\"type\": \"order\", \"id\": 1, \"attributes\": {\n\"order_satus_id\": 11, \"booking_id\": 22, \"status\": {\n\"type\": \"statuses\", \"id\": 1, \"attributes\": {\n\"status\": \"En espera\", \"created_at\": \"2012\/03\/06 17:33:07\", \"updated_at\": \"2012\/03\/06 17:33:07\"}},\n\"booking\": {\"type\": \"bookings\", \"id\": 1, \"attributes\": {\"name\":\"foo booking\", \"email\": \"foo@foo.com\",\n\"phone\": \"+34 111 111 111\", \"date\": \"2022\/04\/13 21:30:00\",\n\"people\": 6, \"table\": \"foo\"}},\n\"recipes\": [{\"order_id\": 1, \"recipe_id\": 1, \"recipe_name\": \"Estofado de ternera\", \"quantity\": 3,\n\"price\": 30.55, \"created_at\": \"2012\/03\/06 17:33:07\", \"updated_at\": \"2012\/03\/06 17:33:07\"},\n{\"order_id\": 1, \"recipe_id\": 2, \"recipe_name\": \"Estofado de ternera\", \"quantity\": 3, \"price\": 28.99,\n\"created_at\": \"2012\/03\/06 17:33:07\",\n\"updated_at\": \"2012\/03\/06 17:33:07\"}],\n\"created_at\": \"2012\/03\/06 17:33:07\", \"updated_at\": \"2012\/03\/06 17:33:07\"\n}},\n{\"type\": \"order\", \"id\": 1, \"attributes\": {\n\"order_satus_id\": 11, \"booking_id\": 22, \"status\": {\n\"type\": \"statuses\", \"id\": 1, \"attributes\": {\n\"status\": \"En espera\", \"created_at\": \"2012\/03\/06 17:33:07\", \"updated_at\": \"2012\/03\/06 17:33:07\"}},\n\"booking\": {\"type\": \"bookings\", \"id\": 1, \"attributes\": {\"name\":\"foo booking\", \"email\": \"foo@foo.com\",\n\"phone\": \"+34 111 111 111\", \"date\": \"2022\/04\/13 21:30:00\",\n\"people\": 6, \"table\": \"foo\"}},\n\"recipes\": [{\"order_id\": 1, \"recipe_id\": 1, \"recipe_name\": \"Estofado de ternera\", \"quantity\": 3,\n\"price\": 30.55, \"created_at\": \"2012\/03\/06 17:33:07\", \"updated_at\": \"2012\/03\/06 17:33:07\"},\n{\"order_id\": 1, \"recipe_id\": 2, \"recipe_name\": \"Estofado de ternera\", \"quantity\": 3, \"price\": 28.99,\n\"created_at\": \"2012\/03\/06 17:33:07\",\n\"updated_at\": \"2012\/03\/06 17:33:07\"}],\n\"created_at\": \"2012\/03\/06 17:33:07\", \"updated_at\": \"2012\/03\/06 17:33:07\"\n}}]",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Confirmed orders",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/orders\/status\/confirmed",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/orders\/status\/confirmed"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Retrieve all confirmed orders.\n\nReturns 200 OK if there is any confirmed order in the database.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "[{\"type\": \"order\", \"id\": 1, \"attributes\": {\n\"order_satus_id\": 11, \"booking_id\": 22, \"status\": {\n\"type\": \"statuses\", \"id\": 1, \"attributes\": {\n\"status\": \"Confirmada\", \"created_at\": \"2012\/03\/06 17:33:07\", \"updated_at\": \"2012\/03\/06 17:33:07\"}},\n\"booking\": {\"type\": \"bookings\", \"id\": 1, \"attributes\": {\"name\":\"foo booking\", \"email\": \"foo@foo.com\",\n\"phone\": \"+34 111 111 111\", \"date\": \"2022\/04\/13 21:30:00\",\n\"people\": 6, \"table\": \"foo\"}},\n\"recipes\": [{\"order_id\": 1, \"recipe_id\": 1, \"recipe_name\": \"Estofado de ternera\", \"quantity\": 3,\n\"price\": 30.55, \"created_at\": \"2012\/03\/06 17:33:07\", \"updated_at\": \"2012\/03\/06 17:33:07\"},\n{\"order_id\": 1, \"recipe_id\": 2, \"recipe_name\": \"Estofado de ternera\", \"quantity\": 3, \"price\": 28.99,\n\"created_at\": \"2012\/03\/06 17:33:07\",\n\"updated_at\": \"2012\/03\/06 17:33:07\"}],\n\"created_at\": \"2012\/03\/06 17:33:07\", \"updated_at\": \"2012\/03\/06 17:33:07\"\n}},\n{\"type\": \"order\", \"id\": 1, \"attributes\": {\n\"order_satus_id\": 11, \"booking_id\": 22, \"status\": {\n\"type\": \"statuses\", \"id\": 1, \"attributes\": {\n\"status\": \"Confirmada\", \"created_at\": \"2012\/03\/06 17:33:07\", \"updated_at\": \"2012\/03\/06 17:33:07\"}},\n\"booking\": {\"type\": \"bookings\", \"id\": 1, \"attributes\": {\"name\":\"foo booking\", \"email\": \"foo@foo.com\",\n\"phone\": \"+34 111 111 111\", \"date\": \"2022\/04\/13 21:30:00\",\n\"people\": 6, \"table\": \"foo\"}},\n\"recipes\": [{\"order_id\": 1, \"recipe_id\": 1, \"recipe_name\": \"Estofado de ternera\", \"quantity\": 3,\n\"price\": 30.55, \"created_at\": \"2012\/03\/06 17:33:07\", \"updated_at\": \"2012\/03\/06 17:33:07\"},\n{\"order_id\": 1, \"recipe_id\": 2, \"recipe_name\": \"Estofado de ternera\", \"quantity\": 3, \"price\": 28.99,\n\"created_at\": \"2012\/03\/06 17:33:07\",\n\"updated_at\": \"2012\/03\/06 17:33:07\"}],\n\"created_at\": \"2012\/03\/06 17:33:07\", \"updated_at\": \"2012\/03\/06 17:33:07\"\n}}]",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Cancelled orders",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/orders\/status\/cancelled",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/orders\/status\/cancelled"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Retrieve all cancelled orders.\n\nReturns 200 OK if there is any cancelled order in the database.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "[{\"type\": \"order\", \"id\": 1, \"attributes\": {\n\"order_satus_id\": 11, \"booking_id\": 22, \"status\": {\n\"type\": \"statuses\", \"id\": 1, \"attributes\": {\n\"status\": \"Cancelada\", \"created_at\": \"2012\/03\/06 17:33:07\", \"updated_at\": \"2012\/03\/06 17:33:07\"}},\n\"booking\": {\"type\": \"bookings\", \"id\": 1, \"attributes\": {\"name\":\"foo booking\", \"email\": \"foo@foo.com\",\n\"phone\": \"+34 111 111 111\", \"date\": \"2022\/04\/13 21:30:00\",\n\"people\": 6, \"table\": \"foo\"}},\n\"recipes\": [{\"order_id\": 1, \"recipe_id\": 1, \"recipe_name\": \"Estofado de ternera\", \"quantity\": 3,\n\"price\": 30.55, \"created_at\": \"2012\/03\/06 17:33:07\", \"updated_at\": \"2012\/03\/06 17:33:07\"},\n{\"order_id\": 1, \"recipe_id\": 2, \"recipe_name\": \"Estofado de ternera\", \"quantity\": 3, \"price\": 28.99,\n\"created_at\": \"2012\/03\/06 17:33:07\",\n\"updated_at\": \"2012\/03\/06 17:33:07\"}],\n\"created_at\": \"2012\/03\/06 17:33:07\", \"updated_at\": \"2012\/03\/06 17:33:07\"\n}},\n{\"type\": \"order\", \"id\": 1, \"attributes\": {\n\"order_satus_id\": 11, \"booking_id\": 22, \"status\": {\n\"type\": \"statuses\", \"id\": 1, \"attributes\": {\n\"status\": \"Cancelada\", \"created_at\": \"2012\/03\/06 17:33:07\", \"updated_at\": \"2012\/03\/06 17:33:07\"}},\n\"booking\": {\"type\": \"bookings\", \"id\": 1, \"attributes\": {\"name\":\"foo booking\", \"email\": \"foo@foo.com\",\n\"phone\": \"+34 111 111 111\", \"date\": \"2022\/04\/13 21:30:00\",\n\"people\": 6, \"table\": \"foo\"}},\n\"recipes\": [{\"order_id\": 1, \"recipe_id\": 1, \"recipe_name\": \"Estofado de ternera\", \"quantity\": 3,\n\"price\": 30.55, \"created_at\": \"2012\/03\/06 17:33:07\", \"updated_at\": \"2012\/03\/06 17:33:07\"},\n{\"order_id\": 1, \"recipe_id\": 2, \"recipe_name\": \"Estofado de ternera\", \"quantity\": 3, \"price\": 28.99,\n\"created_at\": \"2012\/03\/06 17:33:07\",\n\"updated_at\": \"2012\/03\/06 17:33:07\"}],\n\"created_at\": \"2012\/03\/06 17:33:07\", \"updated_at\": \"2012\/03\/06 17:33:07\"\n}}]",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "In Process orders",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/orders\/status\/in-process",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/orders\/status\/in-process"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Retrieve all orders in process.\n\nReturns 200 OK if there is any order in process in the database.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "[{\"type\": \"order\", \"id\": 1, \"attributes\": {\n\"order_satus_id\": 11, \"booking_id\": 22, \"status\": {\n\"type\": \"statuses\", \"id\": 1, \"attributes\": {\n\"status\": \"En proceso\", \"created_at\": \"2012\/03\/06 17:33:07\", \"updated_at\": \"2012\/03\/06 17:33:07\"}},\n\"booking\": {\"type\": \"bookings\", \"id\": 1, \"attributes\": {\"name\":\"foo booking\", \"email\": \"foo@foo.com\",\n\"phone\": \"+34 111 111 111\", \"date\": \"2022\/04\/13 21:30:00\",\n\"people\": 6, \"table\": \"foo\"}},\n\"recipes\": [{\"order_id\": 1, \"recipe_id\": 1, \"recipe_name\": \"Estofado de ternera\", \"quantity\": 3,\n\"price\": 30.55, \"created_at\": \"2012\/03\/06 17:33:07\", \"updated_at\": \"2012\/03\/06 17:33:07\"},\n{\"order_id\": 1, \"recipe_id\": 2, \"recipe_name\": \"Estofado de ternera\", \"quantity\": 3, \"price\": 28.99,\n\"created_at\": \"2012\/03\/06 17:33:07\",\n\"updated_at\": \"2012\/03\/06 17:33:07\"}],\n\"created_at\": \"2012\/03\/06 17:33:07\", \"updated_at\": \"2012\/03\/06 17:33:07\"\n}},\n{\"type\": \"order\", \"id\": 1, \"attributes\": {\n\"order_satus_id\": 11, \"booking_id\": 22, \"status\": {\n\"type\": \"statuses\", \"id\": 1, \"attributes\": {\n\"status\": \"En proceso\", \"created_at\": \"2012\/03\/06 17:33:07\", \"updated_at\": \"2012\/03\/06 17:33:07\"}},\n\"booking\": {\"type\": \"bookings\", \"id\": 1, \"attributes\": {\"name\":\"foo booking\", \"email\": \"foo@foo.com\",\n\"phone\": \"+34 111 111 111\", \"date\": \"2022\/04\/13 21:30:00\",\n\"people\": 6, \"table\": \"foo\"}},\n\"recipes\": [{\"order_id\": 1, \"recipe_id\": 1, \"recipe_name\": \"Estofado de ternera\", \"quantity\": 3,\n\"price\": 30.55, \"created_at\": \"2012\/03\/06 17:33:07\", \"updated_at\": \"2012\/03\/06 17:33:07\"},\n{\"order_id\": 1, \"recipe_id\": 2, \"recipe_name\": \"Estofado de ternera\", \"quantity\": 3, \"price\": 28.99,\n\"created_at\": \"2012\/03\/06 17:33:07\",\n\"updated_at\": \"2012\/03\/06 17:33:07\"}],\n\"created_at\": \"2012\/03\/06 17:33:07\", \"updated_at\": \"2012\/03\/06 17:33:07\"\n}}]",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Delivered orders",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/orders\/status\/delivered",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/orders\/status\/delivered"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Retrieve all delivered orders.\n\nReturns 200 OK if there is any delivered order in the database.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "[{\"type\": \"order\", \"id\": 1, \"attributes\": {\n\"order_satus_id\": 11, \"booking_id\": 22, \"status\": {\n\"type\": \"statuses\", \"id\": 1, \"attributes\": {\n\"status\": \"Entregada\", \"created_at\": \"2012\/03\/06 17:33:07\", \"updated_at\": \"2012\/03\/06 17:33:07\"}},\n\"booking\": {\"type\": \"bookings\", \"id\": 1, \"attributes\": {\"name\":\"foo booking\", \"email\": \"foo@foo.com\",\n\"phone\": \"+34 111 111 111\", \"date\": \"2022\/04\/13 21:30:00\",\n\"people\": 6, \"table\": \"foo\"}},\n\"recipes\": [{\"order_id\": 1, \"recipe_id\": 1, \"recipe_name\": \"Estofado de ternera\", \"quantity\": 3,\n\"price\": 30.55, \"created_at\": \"2012\/03\/06 17:33:07\", \"updated_at\": \"2012\/03\/06 17:33:07\"},\n{\"order_id\": 1, \"recipe_id\": 2, \"recipe_name\": \"Estofado de ternera\", \"quantity\": 3, \"price\": 28.99,\n\"created_at\": \"2012\/03\/06 17:33:07\",\n\"updated_at\": \"2012\/03\/06 17:33:07\"}],\n\"created_at\": \"2012\/03\/06 17:33:07\", \"updated_at\": \"2012\/03\/06 17:33:07\"\n}},\n{\"type\": \"order\", \"id\": 1, \"attributes\": {\n\"order_satus_id\": 11, \"booking_id\": 22, \"status\": {\n\"type\": \"statuses\", \"id\": 1, \"attributes\": {\n\"status\": \"Entregada\", \"created_at\": \"2012\/03\/06 17:33:07\", \"updated_at\": \"2012\/03\/06 17:33:07\"}},\n\"booking\": {\"type\": \"bookings\", \"id\": 1, \"attributes\": {\"name\":\"foo booking\", \"email\": \"foo@foo.com\",\n\"phone\": \"+34 111 111 111\", \"date\": \"2022\/04\/13 21:30:00\",\n\"people\": 6, \"table\": \"foo\"}},\n\"recipes\": [{\"order_id\": 1, \"recipe_id\": 1, \"recipe_name\": \"Estofado de ternera\", \"quantity\": 3,\n\"price\": 30.55, \"created_at\": \"2012\/03\/06 17:33:07\", \"updated_at\": \"2012\/03\/06 17:33:07\"},\n{\"order_id\": 1, \"recipe_id\": 2, \"recipe_name\": \"Estofado de ternera\", \"quantity\": 3, \"price\": 28.99,\n\"created_at\": \"2012\/03\/06 17:33:07\",\n\"updated_at\": \"2012\/03\/06 17:33:07\"}],\n\"created_at\": \"2012\/03\/06 17:33:07\", \"updated_at\": \"2012\/03\/06 17:33:07\"\n}}]",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Paid orders",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/orders\/status\/paid",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/orders\/status\/paid"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Retrieve all paid orders.\n\nReturns 200 OK if there is any paid order in the database.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "[{\"type\": \"order\", \"id\": 1, \"attributes\": {\n\"order_satus_id\": 11, \"booking_id\": 22, \"status\": {\n\"type\": \"statuses\", \"id\": 1, \"attributes\": {\n\"status\": \"Pagada\", \"created_at\": \"2012\/03\/06 17:33:07\", \"updated_at\": \"2012\/03\/06 17:33:07\"}},\n\"booking\": {\"type\": \"bookings\", \"id\": 1, \"attributes\": {\"name\":\"foo booking\", \"email\": \"foo@foo.com\",\n\"phone\": \"+34 111 111 111\", \"date\": \"2022\/04\/13 21:30:00\",\n\"people\": 6, \"table\": \"foo\"}},\n\"recipes\": [{\"order_id\": 1, \"recipe_id\": 1, \"recipe_name\": \"Estofado de ternera\", \"quantity\": 3,\n\"price\": 30.55, \"created_at\": \"2012\/03\/06 17:33:07\", \"updated_at\": \"2012\/03\/06 17:33:07\"},\n{\"order_id\": 1, \"recipe_id\": 2, \"recipe_name\": \"Estofado de ternera\", \"quantity\": 3, \"price\": 28.99,\n\"created_at\": \"2012\/03\/06 17:33:07\",\n\"updated_at\": \"2012\/03\/06 17:33:07\"}],\n\"created_at\": \"2012\/03\/06 17:33:07\", \"updated_at\": \"2012\/03\/06 17:33:07\"\n}},\n{\"type\": \"order\", \"id\": 1, \"attributes\": {\n\"order_satus_id\": 11, \"booking_id\": 22, \"status\": {\n\"type\": \"statuses\", \"id\": 1, \"attributes\": {\n\"status\": \"Pagada\", \"created_at\": \"2012\/03\/06 17:33:07\", \"updated_at\": \"2012\/03\/06 17:33:07\"}},\n\"booking\": {\"type\": \"bookings\", \"id\": 1, \"attributes\": {\"name\":\"foo booking\", \"email\": \"foo@foo.com\",\n\"phone\": \"+34 111 111 111\", \"date\": \"2022\/04\/13 21:30:00\",\n\"people\": 6, \"table\": \"foo\"}},\n\"recipes\": [{\"order_id\": 1, \"recipe_id\": 1, \"recipe_name\": \"Estofado de ternera\", \"quantity\": 3,\n\"price\": 30.55, \"created_at\": \"2012\/03\/06 17:33:07\", \"updated_at\": \"2012\/03\/06 17:33:07\"},\n{\"order_id\": 1, \"recipe_id\": 2, \"recipe_name\": \"Estofado de ternera\", \"quantity\": 3, \"price\": 28.99,\n\"created_at\": \"2012\/03\/06 17:33:07\",\n\"updated_at\": \"2012\/03\/06 17:33:07\"}],\n\"created_at\": \"2012\/03\/06 17:33:07\", \"updated_at\": \"2012\/03\/06 17:33:07\"\n}}]",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Recipes",
+            "description": "\nEndpoints for recipes management",
+            "item": [
+                {
+                    "name": "Get all recipes",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/recipes",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/recipes"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Retrieve all recipes from database.\n\nReturns 200 OK if database contains any recipe.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "[{\"type\": \"recipes\", \"id\": 1, \"attributes\": {\n\"name\": \"Estofado de ternera\", \"price\": 15, \"type\": \"recipe_type\", \"food_type\": \"food_type\",\n\"available\": true, \"food\": {\n\"type\": \"food\", \"id\": 1, \"attributes\": {\n\"name\": \"ternera\", \"units\": \"kg\", \"quantity\": 15, \"created_at\": \"2012\/03\/06 17:33:07\",\n\"updated_at\": \"2012\/03\/06 17:33:07\"}},\n\"created_at\": \"2012\/03\/06 17:33:07\",\n\"updated_at\": \"2012\/03\/06 17:33:07\"}},\n{\"type\": \"recipes\", \"id\": 1, \"attributes\": {\n\"name\": \"Estofado de ternera\", \"price\": 15, \"type\": \"recipe_type\", \"food_type\": \"food_type\",\n\"available\": true, \"food\": {\n\"type\": \"food\", \"id\": 1, \"attributes\": {\n\"name\": \"ternera\", \"units\": \"kg\", \"quantity\": 15, \"created_at\": \"2012\/03\/06 17:33:07\",\n\"updated_at\": \"2012\/03\/06 17:33:07\"}},\n\"created_at\": \"2012\/03\/06 17:33:07\",\n\"updated_at\": \"2012\/03\/06 17:33:07\"}}]",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Create a recipe",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/recipes",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/recipes"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"zfhjjlomkwafoxlbzuclmbxurwhcfg\",\"price\":252.931,\"type\":3,\"food_type\":12,\"available\":true,\"food\":[{\"food_id\":\"aut\",\"quantity\":0}]}"
+                        },
+                        "description": "Endpoint for creating a recipe.\n\nReturns 201 CREATED when created.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get a single recipe",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/recipes\/:recipe",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/recipes\/:recipe",
+                            "variable": [
+                                {
+                                    "id": "recipe",
+                                    "key": "recipe",
+                                    "value": "20",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "User retrieves a single recipe from database.\n\nReturns 200 OK if recipe exists.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"type\": \"recipes\", \"id\": 1, \"attributes\": {\n\"name\": \"Estofado de ternera\", \"price\": 15, \"type\": \"recipe_type\", \"food_type\": \"food_type\",\n\"available\": true, \"food\": {\n\"type\": \"food\", \"id\": 1, \"attributes\": {\n\"name\": \"ternera\", \"units\": \"kg\", \"quantity\": 15, \"created_at\": \"2012\/03\/06 17:33:07\",\n\"updated_at\": \"2012\/03\/06 17:33:07\"}},\n\"created_at\": \"2012\/03\/06 17:33:07\",\n\"updated_at\": \"2012\/03\/06 17:33:07\"}}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Update a recipe",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/recipes\/:recipe",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/recipes\/:recipe",
+                            "variable": [
+                                {
+                                    "id": "recipe",
+                                    "key": "recipe",
+                                    "value": "20",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"name\":\"rxxeicojefughoaqcqlssvgafvijehgqhozcoqebtfedkshnpxsagnvhghepgjiwabbhutmspihphesnxflhge\",\"price\":8117.353,\"type\":8,\"food_type\":13,\"available\":true,\"food\":[{\"food_id\":\"sint\",\"quantity\":5984012.006192}]}"
+                        },
+                        "description": "Endpoint for creating a recipe.\n\nReturns 204 NO_CONTENT when updated.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Delete a recipe",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/recipes\/:recipe",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/recipes\/:recipe",
+                            "variable": [
+                                {
+                                    "id": "recipe",
+                                    "key": "recipe",
+                                    "value": "20",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Endpoint for deleting a recipe.\n\nReturns 204 NO_CONTENT when deleted.\n\nReturns 409 CONFLICT if the recipe exists in 1 or more orders.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Stock",
+            "description": "\nEndpoints for stock management",
+            "item": [
+                {
+                    "name": "Get all stocks",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/stocks",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/stocks"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Retrieve all stocks from database.\n\nReturns 200 OK if database contains any stock.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "[{\"type\": \"stocks\", \"id\": 1, \"attributes\":\n{\"quantity\": 7, \"expiration_date\": \"2022\/04\/13 21:30:00\", \"expired\": false,\n\"food_id\": 5, \"created_at\": \"2022\/04\/13 21:30:00\",\n\"updated_at\": \"2022\/04\/13 21:30:00\"}},\n{\"type\": \"stocks\", \"id\": 2, \"attributes\":\n{\"quantity\": 8, \"expiration_date\": \"2022\/04\/13 21:30:00\", \"expired\": true,\n\"food_id\": 6, \"created_at\": \"2022\/04\/13 21:30:00\",\n\"updated_at\": \"2022\/04\/13 21:30:00\"}}]",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Create a stock",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/stocks",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/stocks"
+                        },
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"quantity\":19738475.72,\"expiration_date\":\"2022-05-27 21:19:06\",\"expired\":false,\"food_id\":\"harum\"}"
+                        },
+                        "description": "Endpoint for creating a stock.\n\nReturns 201 CREATED when created.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get a single stock",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/stocks\/:stock",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/stocks\/:stock",
+                            "variable": [
+                                {
+                                    "id": "stock",
+                                    "key": "stock",
+                                    "value": "10",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "User retrieves a single stock from database.\n\nReturns 200 OK if stock exists.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [],
+                            "code": 200,
+                            "body": "{\"type\": \"stocks\", \"id\": 1, \"attributes\":\n{\"quantity\": 7, \"expiration_date\": \"2022\/04\/13 21:30:00\", \"expired\": false,\n\"food_id\": 5, \"created_at\": \"2022\/04\/13 21:30:00\",\n\"updated_at\": \"2022\/04\/13 21:30:00\"}}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Update a stock",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/stocks\/:stock",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/stocks\/:stock",
+                            "variable": [
+                                {
+                                    "id": "stock",
+                                    "key": "stock",
+                                    "value": "10",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\"quantity\":4786662.912609,\"expiration_date\":\"2022-05-27 21:19:06\",\"expired\":false,\"food_id\":\"sunt\"}"
+                        },
+                        "description": "Endpoint for updating a stock.\n\nReturns 204 NO_CONTENT when updated.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Delete a stock",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/stocks\/:stock",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/stocks\/:stock",
+                            "variable": [
+                                {
+                                    "id": "stock",
+                                    "key": "stock",
+                                    "value": "10",
+                                    "description": ""
+                                }
+                            ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Endpoint for deleting a stock.\n\nReturns 204 NO_CONTENT when deleted.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get all expired stocks",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/stocks\/expiration\/expired",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/stocks\/expiration\/expired"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Retrieve all expired stocks from database.\n\nReturns 200 OK if database contains any expired stock.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                },
+                {
+                    "name": "Get all non-expired stocks",
+                    "request": {
+                        "url": {
+                            "host": "{{baseUrl}}",
+                            "path": "api\/v1\/stocks\/expiration\/non-expired",
+                            "query": [],
+                            "raw": "{{baseUrl}}\/api\/v1\/stocks\/expiration\/non-expired"
+                        },
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application\/json"
+                            },
+                            {
+                                "key": "Accept",
+                                "value": "application\/json"
+                            }
+                        ],
+                        "body": null,
+                        "description": "Retrieve all non-expired stocks from database.\n\nReturns 200 OK if database contains any non-expired stock.",
+                        "auth": {
+                            "type": "noauth"
+                        }
+                    },
+                    "response": [
+                        {
+                            "header": [
+                                {
+                                    "key": "cache-control",
+                                    "value": "no-cache, private"
+                                },
+                                {
+                                    "key": "content-type",
+                                    "value": "application\/json"
+                                },
+                                {
+                                    "key": "access-control-allow-origin",
+                                    "value": "*"
+                                }
+                            ],
+                            "code": 401,
+                            "body": "{\"message\":\"Unauthenticated.\"}",
+                            "name": ""
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "auth": {
+        "type": "noauth"
+    }
+}
