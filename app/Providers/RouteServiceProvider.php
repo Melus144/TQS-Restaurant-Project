@@ -36,14 +36,33 @@ class RouteServiceProvider extends ServiceProvider
                 ->middleware('api')
                 ->group(base_path('routes/api.php'));
 
-            Route::prefix('api')
-                ->middleware('api')
-                ->group(base_path('routes/auth.php'));
-
             Route::prefix('api/fake')
                 ->middleware('api')
                 ->group(base_path('routes/fake.php'));
+            $this->mapAdminRoutes();
         });
+    }
+
+    protected function mapAdminRoutes()
+    {
+        Route::middleware([
+            'web'
+        ])
+            ->name('admin.')
+            ->prefix('admin')
+            ->group( function ($router) {
+                require base_path('routes/admin/auth.php');
+            });
+
+        Route::middleware([
+            'web',
+            'auth.admin',
+        ])
+            ->name('admin.')
+            ->prefix('admin')
+            ->group( function ($router) {
+                require base_path('routes/admin/global.php');
+            });
     }
 
     /**
