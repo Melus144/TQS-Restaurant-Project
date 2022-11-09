@@ -28,9 +28,8 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email|exists:App\Models\User,email',
+            'email' => 'required|email|exists:Users\Models\User,email',
             'password' => 'required',
-            'device_name' => 'required|max:50'
         ];
     }
 

@@ -84,7 +84,7 @@ use App\Models\Recipe;
                         </div>
                     </a>
                 </li>
-                <li class="nav-item cta"><a href="" class="nav-link">Admin</a></li>
+                <li class="nav-item cta"><a href="{{route('admin.home')}}" class="nav-link">Admin</a></li>
 
             </ul>
 	      </div>
