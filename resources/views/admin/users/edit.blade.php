@@ -25,9 +25,9 @@
                         @csrf
                         @method('PATCH')
                         @include('admin.users._fields')
-                        <div class="d-inline-block mt-3">
-                            <x-submit-button/>
-                        </div>
+                        <button type="submit" class="p-4 bg-blue-400">
+                            Save
+                        </button>
                     </form>
                 </div>
             </div>

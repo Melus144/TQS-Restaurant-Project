@@ -3,8 +3,7 @@
 namespace Users\Actions;
 
 use Users\DTOs\UserData;
-use Users\Models\User;
-
+use App\Models\User;
 class CreateUserAction
 {
     public function __invoke(UserData $data): User

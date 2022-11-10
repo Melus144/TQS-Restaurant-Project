@@ -12,14 +12,9 @@ class AuthenticationTest extends TestCase
 
     function test_guest_user_can_login()
     {
-        $user = User::factory()->create([
-            'email' => 'adri@gmail.com',
-            'password' => Hash::make('adritqs')
-        ]);
-
-        $response = $this->postJson(route('admin.login'), [
-            'email' => 'adri@gmail.com',
-            'password' => 'adritqs',
+        $response = $this->post(route('admin.login'), [
+            'email' => 'adrimelus@gmail.com',
+            'password' => ('$2y$10$/UHAlBUc2z3f.lA8h/FqjO0soO5ANBsJxFP5Q6uPEDgEJ82pib5AS')
         ]);
 
         $response->assertOk();
@@ -41,11 +36,23 @@ class AuthenticationTest extends TestCase
         $response->assertUnprocessable();
     }
 
+    public function test_interacting_with_the_session()
+    {
+        $response = $this->withSession(['banned' => false])->get('/');
+    }
+
     function test_authenticated_user_can_logout()
     {
         Sanctum::actingAs(
             User::factory()->create()
         );
+        $user = User::factory()->create([
+            'firstname' => 'Adri',
+            'lastname' => 'Melus',
+            'email' => 'adri@gmail.com',
+            'phone' => '123456789',
+            'password' => Hash::make('adritqs')
+        ]);
 
         $response = $this->postJson(route('admin.logout'));
 
