@@ -7,6 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
+use App\Models\User;
 
 class LoginRequest extends FormRequest
 {
@@ -28,7 +29,7 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email|exists:Users\Models\User,email',
+            'email' => 'required|email|exists:App\Models\User,email',
             'password' => 'required',
         ];
     }

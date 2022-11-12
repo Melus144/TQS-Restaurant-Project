@@ -12,7 +12,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, HasApiTokens;
+    use HasFactory, Notifiable, HasRoles, HasApiTokens;
 
     const FIRSTNAME_MAX_LENGTH = 50;
     const LASTNAME_MAX_LENGTH = 50;

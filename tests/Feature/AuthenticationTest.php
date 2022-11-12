@@ -10,59 +10,76 @@ class AuthenticationTest extends TestCase
 {
     use RefreshDatabase;
 
-    function test_guest_user_can_login()
+    public function test_login_form_displayed()
     {
+        $response = $this->get(route('admin.login'));
+        $response->assertStatus(200);
+    }
+
+    function test_admin_can_send_login_post_request()
+    {
+            $user = User::factory()->create();
+            $hasUser = $user ? true : false;
+            $this->assertTrue($hasUser);
+            $response = $this->post(route('admin.login'), [
+            'email' => $user->email,
+            'password' => $user->password,
+            ]);
+        $response->assertStatus(302);
+    }
+
+    function test_admin_can_login()
+    {
+        $user = User::factory()->create();
+        Sanctum::actingAs($user,[],'web');
         $response = $this->post(route('admin.login'), [
-            'email' => 'adrimelus@gmail.com',
-            'password' => ('$2y$10$/UHAlBUc2z3f.lA8h/FqjO0soO5ANBsJxFP5Q6uPEDgEJ82pib5AS')
+            'email' => $user->email,
+            'password' => $user->password,
         ]);
-
-        $response->assertOk();
+        $response->assertStatus(302);
+        $this->assertAuthenticated();
     }
 
-    function test_guest_user_can_not_login_with_wrong_password()
+    function test_admin_can_not_login_with_wrong_password()
     {
-        User::factory()->create([
-            'email' => 'adri@tqsproject.com',
-            'password' => Hash::make('password')
+        $user = User::factory()->create();
+        $hasUser = $user ? true : false;
+        $this->assertTrue($hasUser);
+        $response = $this->post(route('admin.login'), [
+            'email' => $user->email,
+            'password' => bcrypt("wrong_password")
         ]);
-
-        $response = $this->postJson(route('admin.login'), [
-            'email' => 'adri@tqsproject.com',
-            'password' => 'not password',
-            'device_name' => 'TQS APP'
-        ]);
-
-        $response->assertUnprocessable();
+        $response->assertSessionHasErrors();
+        $this->assertGuest();
     }
 
-    public function test_interacting_with_the_session()
+    function test_admin_can_not_login_without_password()
     {
-        $response = $this->withSession(['banned' => false])->get('/');
+        $user = User::factory()->create();
+        $hasUser = $user ? true : false;
+        $this->assertTrue($hasUser);
+        $response = $this->post(route('admin.login'), [
+            'email' => $user->email,
+        ]);
+        $response->assertSessionHasErrors();
+        $this->assertGuest();
     }
+
 
     function test_authenticated_user_can_logout()
     {
         Sanctum::actingAs(
-            User::factory()->create()
-        );
-        $user = User::factory()->create([
-            'firstname' => 'Adri',
-            'lastname' => 'Melus',
-            'email' => 'adri@gmail.com',
+            User::factory()->create([
+            'firstname' => 'Test',
+            'lastname' => 'testing',
+            'email' => 'test@gmail.com',
             'phone' => '123456789',
-            'password' => Hash::make('adritqs')
-        ]);
-
-        $response = $this->postJson(route('admin.logout'));
-
-        $response->assertOk();
+            'password' => Hash::make('test123')
+        ]),[] , 'web');
+        $this->assertAuthenticated();
+        $response = $this->post(route('admin.logout'));
+        $response->assertRedirect();
+        $this->assertGuest();
     }
 
-    function test_guest_user_can_not_logout()
-    {
-        $response = $this->postJson(route('admin.logout'));
-
-        $response->assertUnauthorized();
-    }
 }

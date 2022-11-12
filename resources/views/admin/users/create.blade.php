@@ -21,12 +21,12 @@
             <div class="card">
                 <div class="card-header">Create user</div>
                 <div class="card-body">
-                    <form method="post" action="{{route('admin.users.store')}}" id="storeUser" enctype="multipart/form-data">
+                    <form method="post" action="{{route('admin.users.store')}}">
                         @csrf
                         @include('admin.users._fields')
                         <div class="d-inline-block mt-3">
                         </div>
-                        <button type="submit" class="p-4 bg-blue-400">
+                        <button type="submit" class="btn btn-primary">
                             Create
                         </button>
                     </form>

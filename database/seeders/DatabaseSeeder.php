@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -21,6 +22,17 @@ class DatabaseSeeder extends Seeder
             ['status' => 'En procés', 'created_at' => \Carbon\Carbon::now(), 'updated_at' => \Carbon\Carbon::now()],
             ['status' => 'Servida', 'created_at' => \Carbon\Carbon::now(), 'updated_at' => \Carbon\Carbon::now()],
             ['status' => 'Pagada', 'created_at' => \Carbon\Carbon::now(), 'updated_at' => \Carbon\Carbon::now()]
+        ]);
+        User::factory()->create([
+            'firstname' => 'Adri',
+            'lastname' => 'Melus',
+            'email' => 'adri@tqsproject.com',
+            'password' => bcrypt('admin'),
+        ]);
+        User::factory()->create([
+            'firstname' => 'Alex',
+            'email' => 'alex@tqsproject.com',
+            'password' => bcrypt('admin'),
         ]);
     }
 }
