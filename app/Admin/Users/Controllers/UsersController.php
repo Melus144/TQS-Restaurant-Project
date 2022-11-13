@@ -8,7 +8,10 @@ use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
-use Users\{ DTOs\UserData, Actions\CreateUserAction, Actions\UpdateUserAction};
+use Users\Actions\CreateUserAction;
+use Users\DTOs\UserData;
+use Users\Actions\UpdateUserAction;
+//use Users\{ DTOs\UserData, Actions\CreateUserAction, Actions\UpdateUserAction};
 
 class UsersController
 {

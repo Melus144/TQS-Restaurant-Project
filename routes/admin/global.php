@@ -13,7 +13,6 @@ Route::resource('users', UsersController::class)->except('show');
 
 
 
-
 //Route::get('/', [OrderController::class, 'index'])->name('home');
 //Route::resource('categories', CategoryController::class)->except('show');
 
