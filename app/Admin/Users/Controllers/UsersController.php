@@ -31,10 +31,30 @@ class UsersController
         return view('admin.users.create', compact('user'));
     }
 
+    /*Old store
+
     public function store(UserStoreRequest $request, CreateUserAction $createUserAction): RedirectResponse
     {
         $data = UserData::fromRequest($request);
         $user = ($createUserAction)($data);
+        return redirect()
+            ->route('admin.users.edit', $user)
+            ->with('status', 'The user has been created successfully.');
+    }
+*/
+    public function store(UserStoreRequest $request): RedirectResponse
+    {
+        //$data = UserData::fromRequest($request);
+        //$user = ($createUserAction)($data);
+        //dd($request);
+        $user = User::Factory()->create([
+            //"remember_token" => $request->_token,
+                "firstname" => $request->firstname,
+                  "lastname" => $request->lastname,
+                  "email" => $request->email,
+                  "password" => $request->password,
+                "phone" => $request->phone
+        ]);
         return redirect()
             ->route('admin.users.edit', $user)
             ->with('status', 'The user has been created successfully.');

@@ -40,4 +40,10 @@ class RoutesBackofficeTest extends TestCase
 
         $response->assertStatus(302);
     }
+    public function test_orders_route()
+    {
+        $response = $this->get('/orders/list');
+
+        $response->assertStatus(302);
+    }
 }

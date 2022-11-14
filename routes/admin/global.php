@@ -7,9 +7,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [UsersController::class, 'index'])->name('home');
 
 Route::get('/users/list', [DatatableController::class, 'listUsers'])->name('datatable.users');
-//Route::post('/users/create', [UsersController::class, 'store'])->name('users.store ');
 // RESOURCES
 Route::resource('users', UsersController::class)->except('show');
+Route::resource('food', ProductsController::class)->except('show');
 
 
 
