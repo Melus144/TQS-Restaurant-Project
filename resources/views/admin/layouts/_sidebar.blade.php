@@ -17,6 +17,12 @@
                     Users
                 </a>
 
+                {{--Food--}}
+                <a class="nav-link {{ Request::segment(2) == 'food' ? 'active' : '' }}"
+                   href="{{route('admin.food.index')}}">
+                    <div class="sb-nav-link-icon"><i class="fas fa-box"></i></div>
+                    Food
+                </a>
 
 
 

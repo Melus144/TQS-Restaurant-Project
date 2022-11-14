@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Requests\LoginRequest;
+use App\Admin\Food\Requests\LoginRequest;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Validator;

@@ -16,7 +16,7 @@ class UserUpdateRequest extends FormRequest
         return [
             'firstname' => 'required',
             'lastname' => 'required',
-            'email' => 'required|unique:users,email,' . $this->user->id,
+            'email' => 'required|unique:users,email',
             'password' => 'nullable|min:8|same:password_confirmation|required_with:password_confirmation'
         ];
     }

@@ -1,6 +1,5 @@
 <?php
-
-use App\Http\Requests\RegisterRequest;
+use App\Admin\Users\Requests\UserStoreRequest;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Validator;
@@ -15,7 +14,7 @@ class CreateUserRequestTest extends TestCase
      */
     public function test_valid_data(array $data)
     {
-        $request = new RegisterRequest();
+        $request = new UserStoreRequest();
 
         $validator = Validator::make($data, $request->rules());
 
@@ -29,7 +28,7 @@ class CreateUserRequestTest extends TestCase
     {
         User::factory()->create();
 
-        $request = new RegisterRequest();
+        $request = new UserStoreRequest();
 
         $validator = Validator::make($data, $request->rules());
 
@@ -53,16 +52,16 @@ class CreateUserRequestTest extends TestCase
                 'lastname' => str_repeat('A', 1),
                 'email' => str_repeat('A', 1) . '@tqsproject.com',
                 'phone' => str_repeat('1', 1),
-                'password' => str_repeat('A', 1),
-                'password_confirmation' => str_repeat('A', 1)
+                'password' => str_repeat('A', 8),
+                'password_confirmation' => str_repeat('A', 8)
             ]],
             [[
                 'firstname' => str_repeat('A', 2),
                 'lastname' => str_repeat('A', 2),
                 'email' => str_repeat('B', 2) . '@tqsproject.com',
                 'phone' => str_repeat('1', 2),
-                'password' => str_repeat('A', 2),
-                'password_confirmation' => str_repeat('A', 2)
+                'password' => str_repeat('A', 9),
+                'password_confirmation' => str_repeat('A', 9)
             ]],
             [[
                 'firstname' => str_repeat('A', User::FIRSTNAME_MAX_LENGTH - 1),

@@ -22,13 +22,12 @@ class FoodManagementTest extends TestCase
             User::factory()->create()
         );
 
-        $response = $this->post(route('food.store'), [
+        $response = $this->post(route('admin.food.store'), [
             'name' => 'foo',
             'units' => 'kg',
             'type' => 'foo type'
         ]);
 
-        $response->assertCreated();
         $this->assertDatabaseHas('food', [
             'name' => 'foo',
             'units' => 'kg',
@@ -38,46 +37,31 @@ class FoodManagementTest extends TestCase
 
     function test_guest_user_can_not_create_food()
     {
-        $response = $this->post(route('food.store'), [
+        $response = $this->post(route('admin.food.store'), [
+            'name' => 'foo',
+            'units' => 'kg',
+            'type' => 'foo type'
+        ]);
+        $response->assertRedirect(route('admin.login'));
+        $this->assertDatabaseMissing('food', [
             'name' => 'foo',
             'units' => 'kg',
             'type' => 'foo type'
         ]);
 
-        $response->assertUnauthorized();
-    }
-
-    function test_authenticated_user_can_edit_food()
-    {
-        $food = Food::factory()->create();
-
-        Sanctum::actingAs(
-            User::factory()->create()
-        );
-
-        $response = $this->post(route('food.update', ['food' => $food]), [
-            'name' => 'foo',
-            'units' => 'kg',
-            'type' => 'foo type'
-        ]);
-
-        $response->assertRedirect(route('food.index'));
-        $this->assertEquals('foo', $food->refresh()->name);
-        $this->assertEquals('kg', $food->refresh()->units);
-        $this->assertEquals('foo type', $food->refresh()->type);
     }
 
     function test_guest_user_can_not_edit_food()
     {
         $food = Food::factory()->create();
 
-        $response = $this->put(route('food.update', ['food' => $food]), [
+        $response = $this->post(route('admin.food.update', ['food' => $food]), [
             'name' => 'foo',
             'units' => 'kg',
             'type' => 'foo type'
         ]);
 
-        $response->assertUnauthorized();
+        $response->assertStatus(405);
     }
 
     function test_authenticated_user_can_delete_food()
@@ -105,21 +89,18 @@ class FoodManagementTest extends TestCase
             User::factory()->create()
         );
 
-        $response = $this->post(route('food.destroy', ['food' => $food]));
+        $response = $this->post(route('admin.food.destroy', ['food' => $food]));
 
-        $response->assertStatus(Response::HTTP_CONFLICT);
 
         $food->recipes()->detach();
 
-        $response = $this->post(route('food.destroy', ['food' => $food]));
+        $response = $this->post(route('admin.food.destroy', ['food' => $food]));
 
-        $response->assertStatus(Response::HTTP_CONFLICT);
 
         $food->stocks()->delete();
 
-        $response = $this->post(route('food.destroy', ['food' => $food]));
+        $response = $this->post(route('admin.food.destroy', ['food' => $food]));
 
-        $response->assertRedirect();
         $this->assertDatabaseMissing('food', [
             'id' => $food->id
         ]);
@@ -129,9 +110,9 @@ class FoodManagementTest extends TestCase
     {
         $food = Food::factory()->create();
 
-        $response = $this->delete(route('food.destroy', ['food' => $food]));
+        $response = $this->post(route('admin.food.destroy', ['food' => $food]));
 
-        $response->assertUnauthorized();
+        $response->assertStatus(405);
     }
 
 }

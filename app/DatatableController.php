@@ -20,4 +20,13 @@ class DatatableController extends Controller
             ->toJson();
     }
 
+    public function listFood(): JsonResponse
+    {
+        return datatables()
+            ->eloquent(User::query()->orderBy('updated_at', 'desc'))
+            ->addColumn('btn', 'admin.food.partials._actions')
+            ->rawColumns(['btn'])
+            ->toJson();
+    }
+
 }

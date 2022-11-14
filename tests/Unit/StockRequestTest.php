@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Requests\StockRequest;
+use App\Admin\Food\Requests\StockRequest;
 use App\Models\Food;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Validator;

@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Requests\OrderRequest;
+use App\Admin\Food\Requests\OrderRequest;
 use App\Models\Booking;
 use App\Models\OrderStatus;
 use App\Models\Recipe;

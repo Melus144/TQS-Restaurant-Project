@@ -8,10 +8,6 @@ use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
-use Users\Actions\CreateUserAction;
-use Users\DTOs\UserData;
-use Users\Actions\UpdateUserAction;
-//use Users\{ DTOs\UserData, Actions\CreateUserAction, Actions\UpdateUserAction};
 
 class UsersController
 {
@@ -31,24 +27,9 @@ class UsersController
         return view('admin.users.create', compact('user'));
     }
 
-    /*Old store
-
-    public function store(UserStoreRequest $request, CreateUserAction $createUserAction): RedirectResponse
-    {
-        $data = UserData::fromRequest($request);
-        $user = ($createUserAction)($data);
-        return redirect()
-            ->route('admin.users.edit', $user)
-            ->with('status', 'The user has been created successfully.');
-    }
-*/
     public function store(UserStoreRequest $request): RedirectResponse
     {
-        //$data = UserData::fromRequest($request);
-        //$user = ($createUserAction)($data);
-        //dd($request);
         $user = User::Factory()->create([
-            //"remember_token" => $request->_token,
                 "firstname" => $request->firstname,
                   "lastname" => $request->lastname,
                   "email" => $request->email,
@@ -60,10 +41,23 @@ class UsersController
             ->with('status', 'The user has been created successfully.');
     }
 
-    public function update(User $user, UserUpdateRequest $request, UpdateUserAction $updateUserAction): RedirectResponse
+    public function update(UserUpdateRequest $request, User $user): RedirectResponse
     {
-        $data = UserData::fromRequest($request);
-        $user = ($updateUserAction)($user, $data);
+        $user->fill([
+            'firstname' => $request->firstname,
+            'lastname' => $request->lastname,
+            'phone' => $request->phone,
+            'email' => $request->email,
+        ]);
+
+        if($request->password) {
+            $user->password = $request->password;
+        }
+
+        $user->save();
+
+        $user->refresh();
+
         return redirect()
             ->route('admin.users.edit', $user)
             ->with('status', 'The user has been updated.');

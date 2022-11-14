@@ -14,10 +14,11 @@ class UserStoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'firstname' => 'required',
-            'lastname' => 'required',
-            'email' => 'required|unique:users',
-            'password' => 'required|min:8|same:password_confirmation'
+            'firstname' => 'required|max:50',
+            'lastname' => 'required|max:50',
+            'phone' => 'numeric|max:15',
+            'email' => 'required|unique:users,email|max:100',
+            'password' => 'nullable|min:8|same:password_confirmation|required_with:password_confirmation|max:150'
         ];
     }
 }
