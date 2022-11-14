@@ -41,10 +41,10 @@ class CreateUserRequestTest extends TestCase
 
         return [
             [[
-                'firstname' => 'Adri',
-                'lastname' => 'Melus',
-                'email' => 'adri@tqsproject.com',
-                'phone' => '',
+                'firstname' => 'New',
+                'lastname' => 'User',
+                'email' => 'notexistingmail@tqsproject.com',
+                'phone' => '123456789',
                 'password' => 'password',
                 'password_confirmation' => 'password'
             ]],
@@ -59,7 +59,7 @@ class CreateUserRequestTest extends TestCase
             [[
                 'firstname' => str_repeat('A', 2),
                 'lastname' => str_repeat('A', 2),
-                'email' => str_repeat('A', 2) . '@tqsproject.com',
+                'email' => str_repeat('B', 2) . '@tqsproject.com',
                 'phone' => str_repeat('1', 2),
                 'password' => str_repeat('A', 2),
                 'password_confirmation' => str_repeat('A', 2)
@@ -123,7 +123,7 @@ class CreateUserRequestTest extends TestCase
             ]],
             [[
                 'lastname' => 'Bergmann',
-                'email' => 'john@tqsproject.com'
+                'email' => 'john2245@tqsproject.com'
             ]],
             [[
                 'lastname' => 'Bergmann',
@@ -134,11 +134,11 @@ class CreateUserRequestTest extends TestCase
                 'password_confirmation' => 'password'
             ]],
             [[
-                'email' => 'josh@tqsproject.com',
+                'email' => 'josh1@tqsproject.com',
                 'password' => 'password'
             ]],
             [[
-                'email' => 'josh@tqsproject.com',
+                'email' => 'josh2@tqsproject.com',
                 'password_confirmation' => 'password'
             ]],
             [[
@@ -146,7 +146,7 @@ class CreateUserRequestTest extends TestCase
                 'password_confirmation' => 'password'
             ]],
             [[
-                'email' => 'josh@tqsproject.com',
+                'email' => 'josh3@tqsproject.com',
                 'password' => 'password',
                 'password_confirmation' => 'password'
             ]],
@@ -157,83 +157,112 @@ class CreateUserRequestTest extends TestCase
             ]],
             [[
                 'firstname' => 'Josh',
-                'email' => 'josh@tqsproject.com',
+                'email' => 'josh4@tqsproject.com',
                 'password_confirmation' => 'password'
             ]],
             [[
                 'firstname' => 'Josh',
-                'email' => 'josh@tqsproject.com',
+                'email' => 'josh5@tqsproject.com',
                 'password' => 'password'
             ]],
             [[
                 'firstname' => null,
-                'email' => 'josh@tqsproject.com',
+                'lastname' => 'Bergmann',
+                'email' => 'josh6@tqsproject.com',
                 'password' => 'password',
                 'password_confirmation' => 'password'
             ]],
             [[
                 'firstname' => 'Josh',
+                'lastname' => null,
+                'email' => 'josh7@tqsproject.com',
+                'password' => 'password',
+                'password_confirmation' => 'password'
+            ]],
+            [[
+                'firstname' => 'Josh',
+                'lastname' => 'Bergmann',
                 'email' => null,
                 'password' => 'password',
                 'password_confirmation' => 'password'
             ]],
             [[
                 'firstname' => 'Josh',
-                'email' => 'josh@tqsproject.com',
+                'lastname' => 'Bergmann',
+                'email' => 'josh8@tqsproject.com',
                 'password' => null,
                 'password_confirmation' => 'password'
             ]],
             [[
-                'name' => 'Josh',
-                'email' => 'josh@tqsproject.com',
+                'firstname' => 'Josh',
+                'lastname' => 'Bergmann',
+                'email' => 'josh9@tqsproject.com',
                 'password' => 'password',
                 'password_confirmation' => null
             ]],
             [[
-                'name' => '',
-                'email' => 'josh@tqsproject.com',
+                'firstname' => '',
+                'lastname' => 'Bergmann',
+                'email' => 'josh10@tqsproject.com',
                 'password' => 'password',
                 'password_confirmation' => 'password'
             ]],
             [[
-                'name' => 'Josh',
-                'email' => '',
+                'firstname' => 'Josh',
+                'email' => 'josh11@tqsproject.com',
                 'password' => 'password',
                 'password_confirmation' => 'password'
             ]],
             [[
-                'name' => 'Josh',
-                'email' => 'josh@tqsproject.com',
-                'password' => '',
-                'password_confirmation' => 'password'
-            ]],
-            [[
-                'name' => 'Josh',
-                'email' => 'josh@tqsproject.com',
-                'password' => 'password',
-                'password_confirmation' => ''
-            ]],
-            [[
-                'name' => str_repeat('A', User::NAME_MAX_LENGTH + 1),
-                'email' => 'josh@tqsproject.com',
+                'firstname' => 'Josh',
+                'lastname' => 'Bergmann',
                 'password' => 'password',
                 'password_confirmation' => 'password'
             ]],
             [[
-                'name' => 'Josh',
-                'email' => str_repeat('A', User::EMAIL_MAX_LENGTH - 7) . '@tqsproject.com',
+                'firstname' => 'Josh',
+                'lastname' => 'Bergmann',
+                'email' => 'josh12@tqsproject.com',
+                'password_confirmation' => 'password'
+            ]],
+            [[
+                'firstname' => 'Josh',
+                'lastname' => 'Bergmann',
+                'email' => 'josh13@tqsproject.com',
+                'password' => 'password',
+            ]],
+            [[
+                'firstname' => str_repeat('A', User::FIRSTNAME_MAX_LENGTH + 1),
+                'lastname' => 'Bergmann',
+                'email' => 'josh14@tqsproject.com',
                 'password' => 'password',
                 'password_confirmation' => 'password'
             ]],
             [[
-                'name' => 'Josh',
-                'email' => 'josh@tqsproject.com',
+                'firstname' => 'Josh',
+                'lastname' => str_repeat('A', User::LASTNAME_MAX_LENGTH + 1),
+                'email' => 'josh15@tqsproject.com',
+                'password' => 'password',
+                'password_confirmation' => 'password'
+            ]],
+            [[
+                'firstname' => 'Josh',
+                'lastname' => 'Bergmann',
+                'email' => str_repeat('A', User::EMAIL_MAX_LENGTH - 14) . '@tqsproject.com',
+                'password' => 'password',
+                'password_confirmation' => 'password'
+            ]],
+            [[
+                'firstname' => 'Josh',
+                'lastname' => 'Bergmann',
+                'email' => 'josh16@tqsproject.com',
                 'password' => str_repeat('A', User::PASSWORD_MAX_LENGTH + 1),
                 'password_confirmation' => str_repeat('A', User::PASSWORD_MAX_LENGTH + 1)
             ]],
             [[
-                'name' => 'Josh',
-                'email' => 'josh@tqsproject.com',
+                'firstname' => 'Josh',
+                'lastname' => 'Bergmann',
+                'email' => 'josh17@tqsproject.com',
                 'password' => 'password',
                 'password_confirmation' => 'not the same password'
             ]],

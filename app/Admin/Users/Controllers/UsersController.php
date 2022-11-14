@@ -52,7 +52,7 @@ class UsersController
                 "firstname" => $request->firstname,
                   "lastname" => $request->lastname,
                   "email" => $request->email,
-                  "password" => $request->password,
+                  "password" => bcrypt($request->password),
                 "phone" => $request->phone
         ]);
         return redirect()

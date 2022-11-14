@@ -18,7 +18,7 @@ class User extends Authenticatable
     const LASTNAME_MAX_LENGTH = 50;
     const PHONE_MAX_LENGTH = 15;
     const EMAIL_MAX_LENGTH = 100;
-    const PASSWORD_MAX_LENGTH = 50;
+    const PASSWORD_MAX_LENGTH = 150;
 
     protected $fillable = [
         'firstname',
