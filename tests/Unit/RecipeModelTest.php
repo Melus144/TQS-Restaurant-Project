@@ -1,7 +1,5 @@
 <?php
 
-namespace Tests\Unit;
-
 use App\Models\Booking;
 use App\Models\Food;
 use App\Models\Order;

@@ -10,11 +10,9 @@ use Tests\TestCase;
 //We are not testing the Authentication feature (that's on AuthenticationTest.php)
 class LoginRequestTest extends TestCase
 {
+    use RefreshDatabase;
 
-    //use RefreshDatabase;
-
-
-    //Email must exist (be registered in db) to validate data from request.
+    //Email must exist (be registered in db) in order to validate data from request.
     //Here we create a user and then we use the email in order to validate data rules from LoginRequest.
     function create_request_emails()
     {
@@ -34,7 +32,6 @@ class LoginRequestTest extends TestCase
             'email' => 'proves',
         ]);
     }
-
 
     /**
      * @dataProvider valid_data_provider

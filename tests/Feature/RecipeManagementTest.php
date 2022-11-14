@@ -1,7 +1,5 @@
 <?php
 
-namespace Tests\Feature;
-
 use App\Models\Booking;
 use App\Models\Food;
 use App\Models\Order;
@@ -18,6 +16,7 @@ use Tests\TestCase;
 class RecipeManagementTest extends TestCase
 {
     use RefreshDatabase;
+    //TODO: Not sure if we are going to implement image features finally
 
     function test_authenticated_user_can_create_recipes()
     {
@@ -29,7 +28,7 @@ class RecipeManagementTest extends TestCase
             User::factory()->create()
         );
 
-        $response = $this->postJson(route('api::v1::recipes.store'), [
+        $response = $this->post(route('recipes.store'), [
             'name' => 'foo',
             'price' => 19.99,
             'type' => Recipe::TYPE_FIRST_COURSE,
@@ -66,6 +65,7 @@ class RecipeManagementTest extends TestCase
             'recipe_id' => 1,
             'quantity' => 49.99
         ]);
+
         Storage::disk('public')->assertExists('images/recipes/1.jpg');
     }
 
@@ -139,7 +139,7 @@ class RecipeManagementTest extends TestCase
     {
         $recipe = Recipe::factory()->create();
 
-        $response = $this->putJson(route('api::v1::recipes.update', ['recipe' => $recipe]), [
+        $response = $this->post(route('recipes.update', ['recipe' => $recipe]), [
             'name' => 'foo',
             'price' => 19.99,
             'type' => Recipe::TYPE_DESERT,
@@ -177,15 +177,14 @@ class RecipeManagementTest extends TestCase
             User::factory()->create()
         );
 
-        $response = $this->deleteJson(route('api::v1::recipes.destroy', ['recipe' => $recipe]));
+        $response = $this->post(route('recipes.destroy', ['recipe' => $recipe]));
 
-        $response->assertStatus(Response::HTTP_CONFLICT);
-
+        $response->assertRedirects($response, route('recipes.index'));
         $recipe->orders()->detach();
 
-        $response = $this->deleteJson(route('api::v1::recipes.destroy', ['recipe' => $recipe]));
+        $response = $this->post(route('recipes.destroy', ['recipe' => $recipe]));
 
-        $response->assertNoContent();
+        $response->assertRedirects($response, route('recipes.index'));
         $this->assertDatabaseMissing('recipes', [
             'id' => $recipe->id
         ]);
@@ -203,7 +202,7 @@ class RecipeManagementTest extends TestCase
         ]);
         $recipe->food()->attach($food, ['quantity' => 450.50]);
 
-        $response = $this->deleteJson(route('api::v1::recipes.destroy', ['recipe' => $recipe]));
+        $response = $this->post(route('recipes.destroy', ['recipe' => $recipe]));
 
         $response->assertUnauthorized();
     }

@@ -8,6 +8,7 @@ use Tests\TestCase;
 
 class AuthenticationTest extends TestCase
 {
+    //Per tal de no anar omplint la base de dades real, utilitzem la funció RefreshDatabase, que esborra tots els registres de la base de dades després de cada test.
     use RefreshDatabase;
 
     public function test_login_form_displayed()

@@ -1,7 +1,5 @@
 <?php
 
-namespace Tests\Unit;
-
 use App\Http\Requests\OrderRequest;
 use App\Models\Booking;
 use App\Models\OrderStatus;

@@ -1,7 +1,5 @@
 <?php
 
-namespace Tests\Feature;
-
 use App\Models\Booking;
 use App\Models\Food;
 use App\Models\Order;
@@ -40,7 +38,7 @@ class FoodManagementTest extends TestCase
 
     function test_guest_user_can_not_create_food()
     {
-        $response = $this->post(route('api::v1::food.store'), [
+        $response = $this->post(route('food.store'), [
             'name' => 'foo',
             'units' => 'kg',
             'type' => 'foo type'
@@ -121,7 +119,7 @@ class FoodManagementTest extends TestCase
 
         $response = $this->post(route('food.destroy', ['food' => $food]));
 
-        $response->assertNoContent();
+        $response->assertRedirect();
         $this->assertDatabaseMissing('food', [
             'id' => $food->id
         ]);

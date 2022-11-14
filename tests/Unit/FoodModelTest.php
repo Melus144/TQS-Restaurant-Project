@@ -1,7 +1,5 @@
 <?php
 
-namespace Tests\Unit;
-
 use App\Models\Food;
 use App\Models\Recipe;
 use App\Models\Stock;

@@ -1,7 +1,5 @@
 <?php
 
-namespace Tests\Unit;
-
 use App\Models\Food;
 use App\Models\Stock;
 use Illuminate\Foundation\Testing\RefreshDatabase;
