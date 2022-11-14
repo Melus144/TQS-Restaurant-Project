@@ -35,6 +35,7 @@ class CreateUserRequestTest extends TestCase
         $this->assertFalse($validator->passes());
     }
 
+    //Test sobre dades valides que el programa pot rebre pel seu correcte funcionament
     public function valid_data_provider(): array
     {
 
@@ -63,6 +64,7 @@ class CreateUserRequestTest extends TestCase
                 'password' => str_repeat('A', 9),
                 'password_confirmation' => str_repeat('A', 9)
             ]],
+            //Test con valores dentro del rango permitido
             [[
                 'firstname' => str_repeat('A', User::FIRSTNAME_MAX_LENGTH - 1),
                 'lastname' => str_repeat('A', User::LASTNAME_MAX_LENGTH - 1),
@@ -82,10 +84,12 @@ class CreateUserRequestTest extends TestCase
         ];
     }
 
+    //Test sobre dades invalides que generarien errors en el programa
     public function invalid_data_provider(): array
     {
         return [
             [[]],
+            //Campos incompletos
             [[
                 'firstname' => 'Josh'
             ]],
@@ -164,6 +168,7 @@ class CreateUserRequestTest extends TestCase
                 'email' => 'josh5@tqsproject.com',
                 'password' => 'password'
             ]],
+            //Campos con valores null
             [[
                 'firstname' => null,
                 'lastname' => 'Bergmann',
@@ -230,6 +235,7 @@ class CreateUserRequestTest extends TestCase
                 'email' => 'josh13@tqsproject.com',
                 'password' => 'password',
             ]],
+            //campos fuera de rango
             [[
                 'firstname' => str_repeat('A', User::FIRSTNAME_MAX_LENGTH + 1),
                 'lastname' => 'Bergmann',
@@ -258,6 +264,7 @@ class CreateUserRequestTest extends TestCase
                 'password' => str_repeat('A', User::PASSWORD_MAX_LENGTH + 1),
                 'password_confirmation' => str_repeat('A', User::PASSWORD_MAX_LENGTH + 1)
             ]],
+            //Contraseñas no coincidentes
             [[
                 'firstname' => 'Josh',
                 'lastname' => 'Bergmann',

@@ -38,6 +38,7 @@ class StockRequestTest extends TestCase
         $this->assertFalse($validator->passes());
     }
 
+    //Test sobre dades valides que el programa pot rebre pel seu correcte funcionament
     public function valid_data_provider(): array
     {
         return [
@@ -61,10 +62,12 @@ class StockRequestTest extends TestCase
         ];
     }
 
+    //Test sobre dades invalides que generarien errors en el programa
     public function invalid_data_provider(): array
     {
         return [
             [[]],
+            //Test con campos incompletos 
             [[
                 'quantity' => 50.55
             ]],
@@ -146,6 +149,7 @@ class StockRequestTest extends TestCase
                 'expired' => false,
                 'food_id' => 1
             ]],
+            //Test con data de caducidad incompleta o con formato erroneo
             [[
                 'quantity' => 50.55,
                 'expiration_date' => '',

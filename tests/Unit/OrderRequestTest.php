@@ -44,6 +44,7 @@ class OrderRequestTest extends TestCase
         $this->assertFalse($validator->passes());
     }
 
+    //Test sobre dades valides que el programa pot rebre pel seu correcte funcionament
     public function valid_data_provider(): array
     {
         return [
@@ -91,6 +92,7 @@ class OrderRequestTest extends TestCase
         ];
     }
 
+    //Test sobre dades invalides que generarien errors en el programa
     public function invalid_data_provider(): array
     {
         return [
@@ -279,6 +281,7 @@ class OrderRequestTest extends TestCase
                     ]
                 ]
             ]],
+            //Campos con valores null o con tipos de datos incorrectos
             [[
                 'booking_id' => null,
                 'recipes' => [

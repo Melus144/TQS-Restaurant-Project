@@ -168,9 +168,11 @@ class RecipeRequestTest extends TestCase
         ];
     }
 
+    //Test sobre dades invalides que generarien errors en el programa
     public function invalid_data_provider(): array
     {
         return [
+            //Test con campos incompletos
             [[
                 'name' => 'foo'
             ]],
@@ -193,6 +195,7 @@ class RecipeRequestTest extends TestCase
                     ['food_id' => 3, 'quantity' => 250.50],
                 ]
             ]],
+            //Test con campos en null o con datos incorrectos
             [[
                 'name' => null,
                 'price' => 19.99,
@@ -276,6 +279,33 @@ class RecipeRequestTest extends TestCase
                 'price' => 19.99,
                 'type' => Recipe::TYPE_FIRST_COURSE,
                 'food_type' => 'not an integer',
+                'available' => true,
+                'image' => UploadedFile::fake()->image('photo1.jpg'),
+                'food' => [
+                    ['food_id' => 1, 'quantity' => 450.50],
+                    ['food_id' => 2, 'quantity' => 350.50],
+                    ['food_id' => 3, 'quantity' => 250.50],
+                ]
+            ]],
+            //Test con valores fuera de rangos
+            [[
+                'name' => '',
+                'price' => 19.99,
+                'type' => Recipe::TYPE_FIRST_COURSE,
+                'food_type' => -1,
+                'available' => true,
+                'image' => UploadedFile::fake()->image('photo1.jpg'),
+                'food' => [
+                    ['food_id' => 1, 'quantity' => 450.50],
+                    ['food_id' => 2, 'quantity' => 350.50],
+                    ['food_id' => 3, 'quantity' => 250.50],
+                ]
+            ]],
+            [[
+                'name' => '',
+                'price' => 19.99,
+                'type' => Recipe::TYPE_FIRST_COURSE,
+                'food_type' => 8,
                 'available' => true,
                 'image' => UploadedFile::fake()->image('photo1.jpg'),
                 'food' => [

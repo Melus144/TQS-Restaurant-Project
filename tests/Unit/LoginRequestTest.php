@@ -56,6 +56,7 @@ class LoginRequestTest extends TestCase
         $this->assertFalse($validator->passes());
     }
 
+    //Test sobre dades valides que el programa pot rebre pel seu correcte funcionament
     public function valid_data_provider(): array
     {
         return [
@@ -78,6 +79,7 @@ class LoginRequestTest extends TestCase
         ];
     }
 
+    //Test sobre dades invalides que generarien errors en el programa
     function invalid_data_provider(): array
     {
         return [

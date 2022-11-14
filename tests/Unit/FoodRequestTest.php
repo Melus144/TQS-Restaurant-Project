@@ -34,6 +34,7 @@ class FoodRequestTest extends TestCase
         $this->assertFalse($validator->passes());
     }
 
+    //Test sobre dades valides que el programa pot rebre pel seu correcte funcionament
     public function valid_data_provider(): array
     {
         return [
@@ -52,6 +53,7 @@ class FoodRequestTest extends TestCase
                 'units' => 'kg',
                 'type' => 'foo type'
             ]],
+            //Test con valores dentro del rango permitido
             [[
                 'name' => str_repeat('A', Food::NAME_MAX_LENGTH - 1),
                 'units' => 'kg',
@@ -109,6 +111,7 @@ class FoodRequestTest extends TestCase
     {
         return [
             [[]],
+            //Campos incompletos o vacios
             [[
                 'name' => 'foo'
             ]],
@@ -118,6 +121,7 @@ class FoodRequestTest extends TestCase
             [[
                 'type' => 'foo type'
             ]],
+            //Campos con valores en null
             [[
                 'name' => null,
                 'units' => 'kg',
@@ -148,6 +152,7 @@ class FoodRequestTest extends TestCase
                 'units' => 'kg',
                 'type' => ''
             ]],
+            //Campos con valores fuera del rango permitdo
             [[
                 'name' => str_repeat('A', Food::NAME_MAX_LENGTH + 1),
                 'units' => 'kg',
