@@ -1,6 +1,5 @@
 <?php
-
-use App\Admin\Food\Requests\RecipeRequest;
+use App\Http\Requests\RecipeRequest;
 use App\Models\Food;
 use App\Models\Recipe;
 use Illuminate\Foundation\Testing\RefreshDatabase;

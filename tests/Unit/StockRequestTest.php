@@ -1,6 +1,6 @@
 <?php
 
-use App\Admin\Food\Requests\StockRequest;
+use App\Http\Requests\StockRequest;
 use App\Models\Food;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Validator;
@@ -67,7 +67,7 @@ class StockRequestTest extends TestCase
     {
         return [
             [[]],
-            //Test con campos incompletos 
+            //Test con campos incompletos
             [[
                 'quantity' => 50.55
             ]],

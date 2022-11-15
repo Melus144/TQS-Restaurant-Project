@@ -1,6 +1,6 @@
 <?php
 
-use App\Admin\Food\Requests\OrderRequest;
+use App\Admin\Orders\Requests\OrderRequest;
 use App\Models\Booking;
 use App\Models\OrderStatus;
 use App\Models\Recipe;
@@ -105,69 +105,7 @@ class OrderRequestTest extends TestCase
                     ]
                 ]
             ]],
-            [[
-                'booking_id' => 1
-            ]],
-            [[
-                'booking_id' => 1,
-                'recipes' => [
-                    [
-                        'quantity' => 2,
-                        'price' => 20.50
-                    ]
-                ]
-            ]],
-            [[
-                'booking_id' => 1,
-                'recipes' => [
-                    [
-                        'recipe_id' => 1,
-                        'price' => 20.50
-                    ]
-                ]
-            ]],
-            [[
-                'booking_id' => 1,
-                'recipes' => [
-                    [
-                        'recipe_id' => 1,
-                        'quantity' => 2
-                    ]
-                ]
-            ]],
-            [[
-                'order_status_id' => 0,
-                'booking_id' => 1,
-                'recipes' => [
-                    [
-                        'recipe_id' => 1,
-                        'quantity' => 2,
-                        'price' => 20.50
-                    ]
-                ]
-            ]],
-            [[
-                'order_status_id' => -1,
-                'booking_id' => 1,
-                'recipes' => [
-                    [
-                        'recipe_id' => 1,
-                        'quantity' => 2,
-                        'price' => 20.50
-                    ]
-                ]
-            ]],
-            [[
-                'order_status_id' => 2,
-                'booking_id' => 1,
-                'recipes' => [
-                    [
-                        'recipe_id' => 1,
-                        'quantity' => 2,
-                        'price' => 20.50
-                    ]
-                ]
-            ]],
+
             [[
                 'order_status_id' => 3,
                 'booking_id' => 1,
@@ -190,97 +128,7 @@ class OrderRequestTest extends TestCase
                     ]
                 ]
             ]],
-            [[
-                'order_status_id' => 'not an integer',
-                'booking_id' => 1,
-                'recipes' => [
-                    [
-                        'recipe_id' => 1,
-                        'quantity' => 2,
-                        'price' => 20.50
-                    ]
-                ]
-            ]],
-            [[
-                'booking_id' => 0,
-                'recipes' => [
-                    [
-                        'recipe_id' => 1,
-                        'quantity' => 2,
-                        'price' => 20.50
-                    ]
-                ]
-            ]],
-            [[
-                'booking_id' => -1,
-                'recipes' => [
-                    [
-                        'recipe_id' => 1,
-                        'quantity' => 2,
-                        'price' => 20.50
-                    ]
-                ]
-            ]],
-            [[
-                'booking_id' => 2,
-                'recipes' => [
-                    [
-                        'recipe_id' => 1,
-                        'quantity' => 2,
-                        'price' => 20.50
-                    ]
-                ]
-            ]],
-            [[
-                'booking_id' => 3,
-                'recipes' => [
-                    [
-                        'recipe_id' => 1,
-                        'quantity' => 2,
-                        'price' => 20.50
-                    ]
-                ]
-            ]],
-            [[
-                'booking_id' => 1,
-                'recipes' => [
-                    [
-                        'recipe_id' => 0,
-                        'quantity' => 2,
-                        'price' => 20.50
-                    ]
-                ]
-            ]],
-            [[
-                'booking_id' => 1,
-                'recipes' => [
-                    [
-                        'recipe_id' => -1,
-                        'quantity' => 2,
-                        'price' => 20.50
-                    ]
-                ]
-            ]],
-            [[
-                'booking_id' => 1,
-                'recipes' => [
-                    [
-                        'recipe_id' => 4,
-                        'quantity' => 2,
-                        'price' => 20.50
-                    ]
-                ]
-            ]],
-            [[
-                'booking_id' => 1,
-                'recipes' => [
-                    [
-                        'recipe_id' => 5,
-                        'quantity' => 2,
-                        'price' => 20.50
-                    ]
-                ]
-            ]],
+
             //Campos con valores null o con tipos de datos incorrectos
             [[
                 'booking_id' => null,

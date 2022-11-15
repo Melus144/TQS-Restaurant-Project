@@ -12,38 +12,21 @@ class RoutesBackofficeTest extends TestCase
 
     public function test_admin_route()
     {
-        $response = $this->get('/admin');
+        $response = $this->get(route('admin.home'));
 
         $response->assertStatus(302);
     }
     public function test_users_route()
     {
-        $response = $this->get('/users/list');
+        $response = $this->get(route('admin.users.index'));
 
         $response->assertStatus(302);
     }
     public function test_food_route()
     {
-        $response = $this->get('/food/list');
+        $response = $this->get(route('admin.food.index'));
 
         $response->assertStatus(302);
     }
-    public function test_recipes_route()
-    {
-        $response = $this->get('/recipes/list');
 
-        $response->assertStatus(302);
-    }
-    public function test_stock_route()
-    {
-        $response = $this->get('/stock/list');
-
-        $response->assertStatus(302);
-    }
-    public function test_orders_route()
-    {
-        $response = $this->get('/orders/list');
-
-        $response->assertStatus(302);
-    }
 }
