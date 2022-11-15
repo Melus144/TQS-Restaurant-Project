@@ -34,6 +34,7 @@ class CartFeaturesTest extends TestCase
 
         $preu_first_course = 0;
         $preu_main_course = 0;
+        $order_price = 0;
         foreach ($all_recipes as $recipe) {
             if($recipe['type'] == Recipe::TYPE_FIRST_COURSE) {
                 $preu_first_course += $recipe['price'];
@@ -43,8 +44,9 @@ class CartFeaturesTest extends TestCase
             $order_price += $recipe['price'];
 
         }
-        $this->assertEquals(31.5, $preu_first_course->sum('price'));
-        $this->assertEquals(101.0, $preu_main_course->sum('price'));
+        $this->assertEquals(31.5, $preu_first_course);
+        $this->assertEquals(101.0, $preu_main_course);
+        $this->assertEquals(132.5, $order_price);
 
     }
 
@@ -56,33 +58,21 @@ class CartFeaturesTest extends TestCase
         $recipes = Recipe::factory()->count(2)->create();
         //$recipe = Recipe::factory()->create();
         //Condition Coverage: Booking id correcto, order status <0 no correcto
-        self::assertFalse($this->test_comanda_valida(-1, $booking->id, $recipes->toArray()));
+        self::assertFalse($booking->test_comanda_valida(-1, $booking->id, $recipes->toArray()));
         //Condition Coverage: Booking id correcto, order status >25 no correcto
-        self::assertFalse($this->test_comanda_valida(27, $booking->id, $recipes->toArray()));
+        self::assertFalse($booking->test_comanda_valida(27, $booking->id, $recipes->toArray()));
 
         //Condition Coverage: 3 condiciones true
         //Decision coverage: TOT OK (booking, order status id >0, <25
-        self::assertTrue($this->test_comanda_valida(3, $booking->id, $recipes->toArray()));
+        self::assertTrue($booking->test_comanda_valida(3, $booking->id, $recipes->toArray()));
 
 
         $recipes_buit = [];
         //Condition coverage: 3 condiciones false
         //Decision coverage: Decisio 2 if false.
-        self::assertFalse($this->test_comanda_valida(27, $booking->id, $recipes_buit));
+        self::assertFalse($booking->test_comanda_valida(27, $booking->id, $recipes_buit));
 
     }
 
-    //This function can be tested in condition, decision, path coverage
-    public function test_comanda_valida($order_status_id, $booking_id, $recipes) {
-        if($order_status_id > 0 && $order_status_id < 25) {
-            $booking = Booking::where('id', $booking_id)->first();
-            if ($booking) {
-                if (count($recipes) > 0) {
-                    return true;
-                }
-            }
-        }
-    return false;
-    }
 
 }

@@ -42,4 +42,17 @@ class Booking extends Model
 
         return false;
     }
+    
+      //This function can be tested in condition, decision, path coverage in CartFeaturesTest
+      public function test_comanda_valida($order_status_id, $booking_id, $recipes): bool {
+        if($order_status_id > 0 && $order_status_id < 25) {
+            $booking = Booking::where('id', $booking_id)->first();
+            if ($booking) {
+                if (count($recipes) > 0) {
+                    return true;
+                }
+            }
+        }
+    return false;
+    }
 }

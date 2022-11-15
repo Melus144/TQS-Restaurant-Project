@@ -199,6 +199,7 @@ class OrderRequestTest extends TestCase
                         'recipe_id' => 1,
                         'quantity' => 2.5,
                         'price' => 20.50
+                        
                     ]
                 ]
             ]],
