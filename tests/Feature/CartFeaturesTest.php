@@ -52,21 +52,23 @@ class CartFeaturesTest extends TestCase
     public function test_guest_can_order() {
 
         //Condition Coverage: Booking id incorrecto
-        $order_status = OrderStatus::factory()->create();
         $booking = Booking::factory()->create();
         $recipes = Recipe::factory()->count(2)->create();
-        //$recipe = Recipe::factory()->count(2)->create();
+        //$recipe = Recipe::factory()->create();
         //Condition Coverage: Booking id correcto, order status <0 no correcto
-
+        self::assertFalse($this->test_comanda_valida(-1, $booking->id, $recipes->toArray()));
         //Condition Coverage: Booking id correcto, order status >25 no correcto
-
+        self::assertFalse($this->test_comanda_valida(27, $booking->id, $recipes->toArray()));
 
         //Condition Coverage: 3 condiciones true
         //Decision coverage: TOT OK (booking, order status id >0, <25
+        self::assertTrue($this->test_comanda_valida(3, $booking->id, $recipes->toArray()));
 
 
+        $recipes_buit = [];
         //Condition coverage: 3 condiciones false
         //Decision coverage: Decisio 2 if false.
+        self::assertFalse($this->test_comanda_valida(27, $booking->id, $recipes_buit));
 
     }
 
