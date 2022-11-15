@@ -45,8 +45,8 @@ class CreateUserRequestTest extends TestCase
                 'lastname' => 'User',
                 'email' => 'notexistingmail@tqsproject.com',
                 'phone' => '123456789',
-                'password' => 'password',
-                'password_confirmation' => 'password'
+                'password' => 'password123',
+                'password_confirmation' => 'password123'
             ]],
             [[
                 'firstname' => str_repeat('A', 1),

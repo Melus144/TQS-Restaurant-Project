@@ -1,5 +1,5 @@
 @php
-    use App\Models\Recipe;
+use App\Models\Recipe;
 
 @endphp
 

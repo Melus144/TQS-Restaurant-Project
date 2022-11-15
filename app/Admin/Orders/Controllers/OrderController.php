@@ -18,6 +18,11 @@ class OrderController extends Controller
         return view('admin.orders.show', ['order' => $order]);
     }
 */
+    public function seed_bd()
+    {
+        \Artisan::call('db:seed');
+
+    }
 
 
 }

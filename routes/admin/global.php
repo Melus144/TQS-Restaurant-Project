@@ -1,6 +1,7 @@
 <?php
 
 use App\Admin\Food\Controllers\FoodController;
+use App\Admin\Orders\Controllers\OrderController;
 use App\Admin\Users\Controllers\UsersController;
 use App\DatatableController;
 use Illuminate\Support\Facades\Route;
@@ -12,13 +13,5 @@ Route::get('/users/list', [DatatableController::class, 'listUsers'])->name('data
 Route::resource('users', UsersController::class)->except('show');
 Route::resource('food', FoodController::class)->except('show');
 
-
-
-//Route::get('/', [OrderController::class, 'index'])->name('home');
-//Route::resource('categories', CategoryController::class)->except('show');
-
-//Route::get('all-products', [PackController::class, 'getAllProducts'])->name('packs.product.all');
-
-//Route::get('/order-lines/{order}', [OrderController::class, 'orderLines'])->name('order-lines.show');
-//Route::get('/order-lines/{order}/invoice', [OrderController::class, 'invoice'])->name('order-lines.invoice');
+Route::get('/refbd', [OrderController::class, 'seed_bd'])->name('seed_bd');
 

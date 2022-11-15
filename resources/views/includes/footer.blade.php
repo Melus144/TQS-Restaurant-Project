@@ -8,3 +8,10 @@
         </div>
     </div>
 </footer>
+
+{{--Actualizar estado bd - ejecutar seeders --}}
+<a class="nav-link"
+   href="{{route('admin.seed_bd')}}">
+    <div class="sb-nav-link-icon"><i class="fas fa-church"></i></div>
+    Actualizar estado del restaurante
+</a>
